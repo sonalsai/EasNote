@@ -57,7 +57,7 @@
     }
   }
 
-  .addNoteButtonContainer{
+  .addNoteButtonContainer {
     width: 100%;
     height: fit-content;
     display: flex;
@@ -68,12 +68,26 @@
     .addNoteButton {
       width: 100%;
       height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background-color: $accent-color;
-      color: $white;
+      color: $button-text-color-1;
+      border: none;
       border-radius: 20px;
+      font-family: $font_family;
       font-size: 16px;
       font-weight: 500;
+      font-style: normal;
       cursor: pointer;
+      vertical-align: middle;
+      transition: background-color 0.3s ease;
+
+      .addNoteIcon {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import "./Header.scss";
 // import Logo from "../../assets/logo.png"; // Assuming you have a logo image
+import PlusIcon from "../../assets/plusIcon.svg";
 
 const Header = () => {
   return (
@@ -19,7 +20,7 @@ const Header = () => {
 
       {/* Add Note Button */}
       <div className="addNoteButtonContainer">
-        <button className="addNoteButton">Add Note</button>
+        <button className="addNoteButton"> <img src={PlusIcon} alt="" className="addNoteIcon" />Add Note</button>
       </div>
     </div>
   );
