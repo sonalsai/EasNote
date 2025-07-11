@@ -1,6 +1,6 @@
-# EasNote - A Simple PWA Note-Taking App
+# EazNote - A Simple PWA Note-Taking App
 
-EasNote is a simple Progressive Web App (PWA) for taking, saving, viewing, editing, and deleting text notes. It's built with React and Vite, and it's designed to be fast, reliable, and easy to use.
+EazNote is a simple Progressive Web App (PWA) for taking, saving, viewing, editing, and deleting text notes. It's built with React and Vite, and it's designed to be fast, reliable, and easy to use.
 
 ## Features
 
@@ -21,7 +21,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  Clone the repo
     ```sh
-    git clone https://github.com/your_username/easnote.git
+    git clone https://github.com/your_username/eaznote.git
     ```
 2.  Install NPM packages
     ```sh
