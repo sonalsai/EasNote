@@ -12,30 +12,30 @@
   flex-direction: column;
   gap: 20px;
   background-color: $secondary-background-color;
+  border-radius: 20px 0 0 20px;
   box-shadow: $box-shadow-soft;
   transition: all 0.3s ease;
-  border-radius: 20px 0 0 20px;
 
   .formFields {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    height: 100%;
 
     .formGroup {
-      width: 100%;
-      height: fit-content;
       display: flex;
       flex-direction: column;
       gap: 4px;
+      width: 100%;
+      height: fit-content;
 
       label {
-        height: fit-content;
         color: $primary-text-color;
         font-family: $font_family;
         font-size: 16px;
         font-weight: 400;
+        height: fit-content;
       }
 
       input {
@@ -60,7 +60,6 @@
       textarea {
         width: 100%;
         height: 300px;
-        resize: none;
         padding: 10px;
         border: 1px solid $secondary-text-color;
         border-radius: 5px;
@@ -69,6 +68,7 @@
         font-family: $font_family;
         font-size: 16px;
         font-weight: 400;
+        resize: none;
 
         &:focus {
           outline: none;
@@ -80,11 +80,11 @@
   }
 
   .buttonContainer {
-    width: 100%;
-    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: fit-content;
     padding: 10px 0;
 
     button {
