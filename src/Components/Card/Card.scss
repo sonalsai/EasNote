@@ -4,14 +4,20 @@
   background: var.$secondary-background-color;
   width: 100%;
   max-width: 300px;
-  min-width: 240px;
-  height: 250px;
+  min-width: 220px;
+  max-height: 220px;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
   box-shadow: var.$box-shadow-medium;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 10px 12px;
+
+  @media screen and (max-width: var.$breakpoint-xl) {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: none;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -48,9 +54,9 @@
       padding: 3px;
       user-select: none;
 
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
   }
 
