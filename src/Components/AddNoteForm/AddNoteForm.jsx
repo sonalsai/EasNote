@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
 
-const AddNoteForm = ({ setShowAddNoteForm }) => {
+const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
   const { register, handleSubmit, watch } = useForm({
     defaultValues: { noteTitle: "", noteContent: "" },
   });
@@ -17,7 +17,7 @@ const AddNoteForm = ({ setShowAddNoteForm }) => {
 
   return (
     <form
-      className="addNoteForm"
+      className={`addNoteForm ${showAddNoteForm ? "show" : ""}`}
       id="addNoteForm"
       onSubmit={handleSubmit((data) => formSubmit(data))}
     >

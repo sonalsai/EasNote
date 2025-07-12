@@ -9,9 +9,10 @@ const Home = () => {
     <div className="homeContainer">
       <Header setShowAddNoteForm={setShowAddNoteForm} />
 
-      {showAddNoteForm && (
-        <AddNoteForm setShowAddNoteForm={setShowAddNoteForm} />
-      )}
+      <AddNoteForm
+        showAddNoteForm={showAddNoteForm}
+        setShowAddNoteForm={setShowAddNoteForm}
+      />
     </div>
   );
 };
