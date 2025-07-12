@@ -1,5 +1,7 @@
 import "./Card.scss";
-import MoreIcon from "../../assets/moreIcon.svg";
+import DeleteIcon from "../../assets/deleteIcon.svg";
+import EditNoteIcon from "../../assets/editNoteIcon.svg";
+
 const Card = ({ note }) => {
   // Helper to get the card title
   const getTitle = () => {
@@ -14,12 +16,16 @@ const Card = ({ note }) => {
   return (
     <div className="cardContainer">
       <div className="cardHeader">
-        <h2>
-          {getTitle()}
-        </h2>
-        <button className="moreButton">
-          <img src={MoreIcon} alt="" />
-        </button>
+        <h2>{getTitle()}</h2>
+        <div className="actionButtons">
+          <button className="editBtn">
+            <img src={EditNoteIcon} alt="" />
+          </button>
+
+          <button className="deleteBtn">
+            <img src={DeleteIcon} alt="" />
+          </button>
+        </div>
       </div>
       <div className="cardContent">
         <p>{note?.content}</p>
