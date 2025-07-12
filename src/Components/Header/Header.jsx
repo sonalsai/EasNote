@@ -1,5 +1,5 @@
 import "./Header.scss";
-// import Logo from "../../assets/logo.png"; // Assuming you have a logo image
+// import Logo from "../../assets/logo.png";
 import PlusIcon from "../../assets/plusIcon.svg";
 
 const Header = ({setShowAddNoteForm}) => {

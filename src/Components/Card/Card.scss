@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+
+.cardContainer {
+  background: $secondary-background-color;
+  width: 240px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: $box-shadow-medium;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px 12px;
+
+  .cardHeader {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: $primary-text-color;
+      margin: 0;
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+
+  .cardContent {
+    width: 100%;
+    height: 170px;
+    
+    p {
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      color: $secondary-text-color;
+      text-align: left;
+      margin: 0;
+      font-weight: 300;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 8; /* Adjust this to control the number of lines shown */
+      line-clamp: 8;
+    }
+  }
+}
