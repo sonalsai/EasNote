@@ -141,7 +141,7 @@
 
       &:hover {
         background-color: color.adjust(#bb86fc, $lightness: -4%);
-        box-shadow: var.$box-shadow-accent;
+        box-shadow: var.$box-shadow-accent-1;
       }
     }
   }
