@@ -9,6 +9,12 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
 
   const formSubmit = (data) => {
     console.log(data);
+
+    if (data.noteTitle.trim() === "" && data.noteContent.trim() === "") {
+      closeForm();
+      return;
+    }
+
     const note = {
       id: Date.now(),
       title: data.noteTitle,
@@ -17,7 +23,7 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
       isLockedNote: false,
       isDeletedNote: false,
       createdAt: new Date().toLocaleString(),
-    }
+    };
 
     const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
     storedNotes.push(note);
