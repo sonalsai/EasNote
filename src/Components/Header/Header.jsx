@@ -13,11 +13,11 @@ const Header = ({ setShowAddNoteForm }) => {
       <div className="titleContainer">
         <img
           src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
-          alt="EasNote Logo"
+          alt="EazNote Logo"
           className="headerLogo"
         />
         <div className="textContainer">
-          <h1 className="headerTitle">EasNote</h1>
+          <h1 className="headerTitle">EazNote</h1>
           <span className="headerSubtitle">Your Easy Note-Taking App</span>
         </div>
       </div>

@@ -7,7 +7,7 @@ EazNote is a simple Progressive Web App (PWA) for taking, saving, viewing, editi
 *   **Create and Save Notes:** Quickly jot down your thoughts and save them for later.
 *   **View and Edit Notes:** Easily view and edit your existing notes.
 *   **Delete Notes:** Remove notes you no longer need.
-*   **Offline Access:** As a PWA, EasNote can be installed on your device and used even when you're offline.
+*   **Offline Access:** As a PWA, EazNote can be installed on your device and used even when you're offline.
 
 ## Getting Started
 
