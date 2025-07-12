@@ -85,10 +85,13 @@
         font-size: 16px;
         font-weight: 400;
 
+        &:focus,
+        &:not(:placeholder-shown) {
+          border-color: $accent-color;
+        }
+
         &:focus {
           outline: none;
-          border-color: $accent-color;
-          //   box-shadow: $box-shadow-accent;
         }
 
         &:focus + label,
