@@ -9,20 +9,22 @@
 }
 
 body {
+  margin: 0;
   font-family: var.$font-family;
   background-color: var.$background-color;
   color: var.$primary-text-color;
-  margin: 0;
 }
 
-//write scrollbar style for globally
+// Global scrollbar styles
 ::-webkit-scrollbar {
   width: 4px;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: var.$secondary-text-color;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-track {
   background-color: var.$secondary-background-color;
 }
