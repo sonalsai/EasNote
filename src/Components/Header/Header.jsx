@@ -1,10 +1,10 @@
 import "./Header.scss";
 // import Logo from "../../assets/logo.png";
-import addNotesIcon from "../../assets/addNotesIcon.svg";
-import allNotesIcon from "../../assets/allNotesIcon.svg";
-import favoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
-import lockedNoteIcon from "../../assets/lockedNoteIcon.svg";
-import deleteIcon from "../../assets/deleteIcon.svg";
+import AddNotesIcon from "../../assets/addNotesIcon.svg";
+import AllNotesIcon from "../../assets/allNotesIcon.svg";
+import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
+import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
+import DeleteIcon from "../../assets/deleteIcon.svg";
 
 const Header = ({ setShowAddNoteForm }) => {
   return (
@@ -25,19 +25,19 @@ const Header = ({ setShowAddNoteForm }) => {
       {/* Note Options */}
       <div className="noteOptionsContainer">
         <button className="noteOptionButton">
-          <img src={allNotesIcon} alt="" />
+          <img src={AllNotesIcon} alt="" />
           All Notes
         </button>
         <button className="noteOptionButton">
-          <img src={favoriteNoteIcon} alt="" />
+          <img src={FavoriteNoteIcon} alt="" />
           Favorites Notes
         </button>
         <button className="noteOptionButton">
-          <img src={lockedNoteIcon} alt="" />
+          <img src={LockedNoteIcon} alt="" />
           Locked Notes
         </button>
         <button className="noteOptionButton">
-          <img src={deleteIcon} alt="" />
+          <img src={DeleteIcon} alt="" />
           Recycle Bin</button>
       </div>
 
@@ -48,7 +48,7 @@ const Header = ({ setShowAddNoteForm }) => {
           onClick={() => setShowAddNoteForm(true)}
         >
           {" "}
-          <img src={addNotesIcon} alt="" className="addNoteIcon" />
+          <img src={AddNotesIcon} alt="" className="addNoteIcon" />
           Add Note
         </button>
       </div>

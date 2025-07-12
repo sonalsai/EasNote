@@ -24,4 +24,12 @@
       grid-template-columns: repeat(auto-fill, minmax(300px, max-content));
     }
   }
+
+  .noNotes {
+    align-content: center;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    user-select: none;
+  }
 }
