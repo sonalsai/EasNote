@@ -36,24 +36,24 @@ const AddNoteForm = ({ setShowAddNoteForm }) => {
       <div className="formFields">
         {/* Note Title */}
         <div className="formGroup">
-          <label htmlFor="noteTitle">Title</label>
           <input
             type="text"
             id="noteTitle"
             {...register("noteTitle")}
-            placeholder="Enter note title"
+            placeholder=" "
             autoComplete="off"
           />
+          <label htmlFor="noteTitle">Title</label>
         </div>
 
         {/* Note Content */}
         <div className="formGroup">
-          <label htmlFor="noteContent">Content</label>
           <textarea
             id="noteContent"
             {...register("noteContent")}
-            placeholder="Enter note content"
+            placeholder=" "
           ></textarea>
+          <label htmlFor="noteContent">Content</label>
         </div>
       </div>
 
