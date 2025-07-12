@@ -1,13 +1,13 @@
-@import "../../styles/variables";
+@use "../../styles/variables" as var;
 
 .cardContainer {
-  background: $secondary-background-color;
+  background: var.$secondary-background-color;
   width: 100%;
   height: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  box-shadow: $box-shadow-medium;
+  box-shadow: var.$box-shadow-medium;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 10px 12px;
 
@@ -21,7 +21,7 @@
     h2 {
       font-size: 20px;
       font-weight: 500;
-      color: $primary-text-color;
+      color: var.$primary-text-color;
       margin: 0;
       width: fit-content;
       height: fit-content;
@@ -54,7 +54,7 @@
       width: 100%;
       height: 100%;
       font-size: 14px;
-      color: $secondary-text-color;
+      color: var.$secondary-text-color;
       text-align: left;
       margin: 0;
       font-weight: 300;
