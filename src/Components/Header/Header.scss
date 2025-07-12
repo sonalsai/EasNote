@@ -58,6 +58,47 @@
     }
   }
 
+  .noteOptionsContainer {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0;
+
+    .noteOptionButton {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 8px;
+      background-color: transparent;
+      color: $white;
+      border: none;
+      border-radius: 40px;
+      font-family: $font_family;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+      padding: 0 20px;
+
+      &:hover {
+        font-size: 17px;
+        background-color: darken($accent-color, 10%);
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
   .addNoteButtonContainer {
     width: 100%;
     height: fit-content;
