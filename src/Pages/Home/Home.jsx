@@ -3,11 +3,15 @@ import Header from "../../Components/Header/Header";
 import "./Home.scss";
 import AddNoteForm from "../../Components/AddNoteForm/AddNoteForm";
 import Card from "../../Components/Card/Card";
+import ViewNote from "../../Components/ViewNote/ViewNote";
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
+  const [viewNote, setViewNote] = useState(false);
+  const [viewNoteData, setViewNoteData] = useState(null);
+
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
-  let cardCount = 15;
+
   return (
     <div className="homeContainer">
       {/* Header Division */}
@@ -28,14 +32,21 @@ const Home = () => {
       {/* Note Container Division */}
       {allNotesFromLocalStorage.length > 0 && (
         <div className="noteContainer">
-          {allNotesFromLocalStorage.map((note, index) => {
-            if (index < cardCount) {
-              return <Card key={note.id} note={note} />;
-            }
-            return null;
+          {allNotesFromLocalStorage.map((note) => {
+            return (
+              <Card
+                key={note.id}
+                note={note}
+                setViewNote={setViewNote}
+                setViewNoteData={setViewNoteData}
+              />
+            );
           })}
         </div>
       )}
+
+      {/* View Note */}
+      {viewNote && <ViewNote note={viewNoteData} />}
     </div>
   );
 };

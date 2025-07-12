@@ -1,0 +1,15 @@
+@use "../../styles/variables" as var;
+
+.viewNoteContainer {
+  position: fixed;
+  top: 10%;
+  right: 20%;
+  z-index: 1000;
+  width: 50%;
+  height: 80%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var.$secondary-background-color;
+}

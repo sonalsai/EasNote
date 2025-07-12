@@ -2,7 +2,7 @@ import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
 
-const Card = ({ note }) => {
+const Card = ({ note, setViewNote, setViewNoteData }) => {
   // Helper to get the card title
   const getTitle = () => {
     if (note?.title) return note.title;
@@ -13,8 +13,22 @@ const Card = ({ note }) => {
     return "";
   };
 
+  //Delete note function can be added here
+  const handleDelete = (id) => {
+    const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+    const updatedNotes = allNotes.filter((note) => note.id !== id);
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    window.location.reload();
+  };
+
+  const handleNoteView = () => {
+    setViewNote(true);
+    setViewNoteData(note);
+    console.log("Note data set for viewing:", note); // Debugging log
+  };
+
   return (
-    <div className="cardContainer">
+    <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
         <h2>{getTitle()}</h2>
         <div className="actionButtons">
@@ -23,7 +37,11 @@ const Card = ({ note }) => {
           </button>
 
           <button className="deleteBtn">
-            <img src={DeleteIcon} alt="" />
+            <img
+              src={DeleteIcon}
+              alt=""
+              onClick={() => handleDelete(note?.id)}
+            />
           </button>
         </div>
       </div>
