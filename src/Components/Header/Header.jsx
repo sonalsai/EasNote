@@ -2,7 +2,7 @@ import "./Header.scss";
 // import Logo from "../../assets/logo.png"; // Assuming you have a logo image
 import PlusIcon from "../../assets/plusIcon.svg";
 
-const Header = () => {
+const Header = ({setShowAddNoteForm}) => {
   return (
     <div className="headerContainer">
       {/* Title */}
@@ -20,7 +20,7 @@ const Header = () => {
 
       {/* Add Note Button */}
       <div className="addNoteButtonContainer">
-        <button className="addNoteButton"> <img src={PlusIcon} alt="" className="addNoteIcon" />Add Note</button>
+        <button className="addNoteButton" onClick={()=> setShowAddNoteForm(true)}> <img src={PlusIcon} alt="" className="addNoteIcon" />Add Note</button>
       </div>
     </div>
   );
