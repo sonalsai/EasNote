@@ -5,7 +5,7 @@ import AddNoteForm from "../../Components/AddNoteForm/AddNoteForm";
 import Card from "../../Components/Card/Card";
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
-
+  let cardCount = 15;
   return (
     <div className="homeContainer">
       {/* Header Division */}
@@ -20,31 +20,12 @@ const Home = () => {
 
       {/* Note Container Division */}
       <div className="noteContainer">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {
+          // Dynamically render cards based on cardCount
+          Array.from({ length: cardCount }, (_, index) => (
+            <Card key={index} />
+          ))
+        }
       </div>
     </div>
   );
