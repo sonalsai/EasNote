@@ -16,6 +16,32 @@
   box-shadow: $box-shadow-soft;
   transition: all 0.3s ease;
 
+  .formHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+
+    .formTitle {
+      font-size: 24px;
+      font-weight: 500;
+      color: $primary-text-color;
+      margin: 0;
+    }
+
+    .closeButton {
+      width: 30px;
+      height: 30px;
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+
   .formFields {
     display: flex;
     flex-direction: column;
@@ -55,6 +81,7 @@
           border-color: $accent-color;
           box-shadow: $box-shadow-accent;
         }
+
       }
 
       textarea {

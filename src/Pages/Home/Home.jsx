@@ -9,7 +9,9 @@ const Home = () => {
     <div className="homeContainer">
       <Header setShowAddNoteForm={setShowAddNoteForm} />
 
-      {showAddNoteForm && <AddNoteForm/> }
+      {showAddNoteForm && (
+        <AddNoteForm setShowAddNoteForm={setShowAddNoteForm} />
+      )}
     </div>
   );
 };
