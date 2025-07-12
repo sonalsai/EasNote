@@ -2,8 +2,8 @@
 
 .cardContainer {
   background: $secondary-background-color;
-  width: 240px;
-  height: 260px;
+  width: 100%;
+  height: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -17,6 +17,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+
     h2 {
       font-size: 20px;
       font-weight: 500;
@@ -25,12 +26,30 @@
       width: fit-content;
       height: fit-content;
     }
+
+    .moreButton {
+      margin-left: auto;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 3px;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
   }
 
   .cardContent {
     width: 100%;
     height: 170px;
-    
+
     p {
       width: 100%;
       height: 100%;
