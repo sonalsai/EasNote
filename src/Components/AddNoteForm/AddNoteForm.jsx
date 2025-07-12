@@ -3,12 +3,28 @@ import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
 
 const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: { noteTitle: "", noteContent: "" },
   });
 
   const formSubmit = (data) => {
     console.log(data);
+    const note = {
+      id: Date.now(),
+      title: data.noteTitle,
+      content: data.noteContent,
+      isFavNote: false,
+      isLockedNote: false,
+      isDeletedNote: false,
+      createdAt: new Date().toLocaleString(),
+    }
+
+    const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
+    storedNotes.push(note);
+    localStorage.setItem("notes", JSON.stringify(storedNotes));
+
+    closeForm();
+    window.location.reload();
   };
 
   const closeForm = () => {

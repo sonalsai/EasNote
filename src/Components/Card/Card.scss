@@ -3,6 +3,7 @@
 .cardContainer {
   background: var.$secondary-background-color;
   width: 100%;
+  max-width: 300px;
   height: 250px;
   display: flex;
   flex-direction: column;

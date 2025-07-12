@@ -5,6 +5,7 @@ import AddNoteForm from "../../Components/AddNoteForm/AddNoteForm";
 import Card from "../../Components/Card/Card";
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
+  const allNotesFromLocalStorage = JSON.parse(localStorage.getItem("notes")) || [];
   let cardCount = 15;
   return (
     <div className="homeContainer">
@@ -21,10 +22,21 @@ const Home = () => {
       {/* Note Container Division */}
       <div className="noteContainer">
         {
-          // Dynamically render cards based on cardCount
-          Array.from({ length: cardCount }, (_, index) => (
-            <Card key={index} />
-          ))
+          allNotesFromLocalStorage.length > 0 ? (
+            allNotesFromLocalStorage.map((note, index) => {
+              if (index < cardCount) {
+                return (
+                  <Card
+                    key={note.id}
+                    note={note}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <div className="noNotes">No Notes Available</div>
+          )
         }
       </div>
     </div>
