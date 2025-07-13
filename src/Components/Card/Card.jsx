@@ -4,6 +4,7 @@ import EditNoteIcon from "../../assets/editNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
 import { useState } from "react";
 import { DialogType } from "../../enums";
+import { getTitle } from "../../utils/card";
 
 const Card = ({
   note,
@@ -17,17 +18,6 @@ const Card = ({
 }) => {
   const [showOptions, setShowOptions] = useState(false);
 
-  // Helper to get the card title
-  const getTitle = () => {
-    if (note?.title) return note.title;
-    if (note?.content) {
-      const words = note.content.trim().split(/\s+/);
-      return words.slice(0, 2).join(" ") + (words.length > 2 ? "..." : "");
-    }
-    return "";
-  };
-
-  //Delete note function can be added here
   const handleDelete = (e, id) => {
     e.stopPropagation();
     setDeleteNoteId(id);
