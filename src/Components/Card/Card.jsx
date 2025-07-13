@@ -1,6 +1,8 @@
 import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
+import MoreIcon from "../../assets/moreIcon.svg";
+import { useState } from "react";
 
 const Card = ({
   note,
@@ -9,6 +11,8 @@ const Card = ({
   setEditNoteData,
   setShowAddNoteForm,
 }) => {
+  const [showOptions, setShowOptions] = useState(false);
+
   // Helper to get the card title
   const getTitle = () => {
     if (note?.title) return note.title;
@@ -46,12 +50,24 @@ const Card = ({
       <div className="cardHeader">
         <h2>{getTitle()}</h2>
         <div className="actionButtons">
-          <button className="editBtn" onClick={(e) => handleEdit(e)}>
-            <img src={EditNoteIcon} alt="" />
+          <button className="moreBtn" onClick={(e) => {
+            e.stopPropagation();
+            setShowOptions(!showOptions);
+          }}>
+            <img src={MoreIcon} alt="" />
           </button>
-          <button className="deleteBtn" onClick={() => handleDelete(note?.id)}>
-            <img src={DeleteIcon} alt="" />
-          </button>
+          {showOptions && (
+            <div className="optionsDropdown">
+              <button className="editBtn" onClick={(e) => handleEdit(e)}>
+                <img src={EditNoteIcon} alt="" />
+                Edit
+              </button>
+              <button className="deleteBtn" onClick={() => handleDelete(note?.id)}>
+                <img src={DeleteIcon} alt="" />
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div className="cardContent">
