@@ -28,13 +28,12 @@ const Card = ({
   };
 
   //Delete note function can be added here
-  const handleDelete = (e,id) => {
+  const handleDelete = (e, id) => {
     e.stopPropagation();
     setDeleteNoteId(id);
     setShowDialogBox(true);
     setDialogType(DialogType.CONFIRM_DELETE);
     setShowOptions(false);
-
   };
 
   const handleNoteView = () => {
@@ -54,12 +53,15 @@ const Card = ({
   return (
     <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
-        <h2>{getTitle()}</h2>
+        <h2>{getTitle(note)}</h2>
         <div className="actionButtons">
-          <button className="moreBtn" onClick={(e) => {
-            e.stopPropagation();
-            setShowOptions(!showOptions);
-          }}>
+          <button
+            className="moreBtn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowOptions(!showOptions);
+            }}
+          >
             <img src={MoreIcon} alt="" />
           </button>
           {showOptions && (
@@ -68,7 +70,10 @@ const Card = ({
                 <img src={EditNoteIcon} alt="" />
                 Edit
               </button>
-              <button className="deleteBtn" onClick={(e) => handleDelete(e,note?.id)}>
+              <button
+                className="deleteBtn"
+                onClick={(e) => handleDelete(e, note?.id)}
+              >
                 <img src={DeleteIcon} alt="" />
                 Delete
               </button>
