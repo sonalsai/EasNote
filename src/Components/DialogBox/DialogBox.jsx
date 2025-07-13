@@ -36,6 +36,9 @@ const DialogBox = ({
     } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
       setShowAddNoteForm(false);
       setEditNoteData(null);
+    } else if (dialogType === DialogType.CONFIRM_ADD_CLOSE) {
+      setShowAddNoteForm(false);
+      setEditNoteData(null);
     }
     handleClose();
   };

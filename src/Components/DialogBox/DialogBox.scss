@@ -107,7 +107,9 @@
         }
       }
 
-      .deleteBtn, .editCloseBtn {
+      .deleteBtn,
+      .editCloseBtn,
+      .addCloseBtn {
         background-color: red;
         color: var.$white;
 

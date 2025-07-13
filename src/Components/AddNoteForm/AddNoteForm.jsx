@@ -17,6 +17,17 @@ const AddNoteForm = ({
   const { register, handleSubmit, reset, watch } = useForm();
 
   useEffect(() => {
+    if (!showAddNoteForm) {
+      setIsVisible(false);
+      setTimeout(() => {
+        setEditNoteData(null);
+        setIsSaved(false);
+        reset();
+      }, 300);
+    }
+  }, [showAddNoteForm, setEditNoteData, reset, setIsSaved, setShowAddNoteForm]);
+
+  useEffect(() => {
     if (editNoteData) {
       reset({
         noteTitle: editNoteData.title,
