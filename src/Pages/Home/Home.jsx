@@ -8,6 +8,7 @@ const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
   const [viewNote, setViewNote] = useState(false);
   const [viewNoteData, setViewNoteData] = useState(null);
+  const [editNoteData, setEditNoteData] = useState(null);
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
@@ -22,6 +23,8 @@ const Home = () => {
       <AddNoteForm
         showAddNoteForm={showAddNoteForm}
         setShowAddNoteForm={setShowAddNoteForm}
+        editNoteData={editNoteData}
+        setEditNoteData={setEditNoteData}
       />
 
       {/* No Notes Division */}
@@ -39,6 +42,8 @@ const Home = () => {
                 note={note}
                 setViewNote={setViewNote}
                 setViewNoteData={setViewNoteData}
+                setEditNoteData={setEditNoteData}
+                setShowAddNoteForm={setShowAddNoteForm}
               />
             );
           })}

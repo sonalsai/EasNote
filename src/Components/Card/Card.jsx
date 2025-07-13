@@ -2,7 +2,13 @@ import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
 
-const Card = ({ note, setViewNote, setViewNoteData }) => {
+const Card = ({
+  note,
+  setViewNote,
+  setViewNoteData,
+  setEditNoteData,
+  setShowAddNoteForm,
+}) => {
   // Helper to get the card title
   const getTitle = () => {
     if (note?.title) return note.title;
@@ -26,21 +32,25 @@ const Card = ({ note, setViewNote, setViewNoteData }) => {
     setViewNoteData(note);
   };
 
+  const handleEdit = (e) => {
+    e.stopPropagation();
+
+    setEditNoteData(note);
+    setShowAddNoteForm(true);
+    setViewNote(false);
+    setViewNoteData(null);
+  };
+
   return (
     <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
         <h2>{getTitle()}</h2>
         <div className="actionButtons">
-          <button className="editBtn">
+          <button className="editBtn" onClick={(e) => handleEdit(e)}>
             <img src={EditNoteIcon} alt="" />
           </button>
-
-          <button className="deleteBtn">
-            <img
-              src={DeleteIcon}
-              alt=""
-              onClick={() => handleDelete(note?.id)}
-            />
+          <button className="deleteBtn" onClick={() => handleDelete(note?.id)}>
+            <img src={DeleteIcon} alt="" />
           </button>
         </div>
       </div>

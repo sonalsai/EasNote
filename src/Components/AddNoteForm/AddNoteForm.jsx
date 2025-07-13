@@ -1,13 +1,30 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
 
-const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
+const AddNoteForm = ({
+  showAddNoteForm,
+  setShowAddNoteForm,
+  editNoteData,
+  setEditNoteData,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: { noteTitle: "", noteContent: "" },
-  });
+  const { register, handleSubmit, reset } = useForm();
+
+  useEffect(() => {
+    if (editNoteData) {
+      reset({
+        noteTitle: editNoteData.title,
+        noteContent: editNoteData.content,
+      });
+    } else {
+      reset({
+        noteTitle: "",
+        noteContent: "",
+      });
+    }
+  }, [editNoteData, reset]);
 
   useEffect(() => {
     if (showAddNoteForm) {
@@ -18,6 +35,7 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => {
+      setEditNoteData(null);
       setShowAddNoteForm(false);
       reset();
     }, 300);
@@ -29,19 +47,34 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
       return;
     }
 
-    const note = {
-      id: Date.now(),
-      title: data.noteTitle,
-      content: data.noteContent,
-      isFavNote: false,
-      isLockedNote: false,
-      isDeletedNote: false,
-      createdAt: new Date().toLocaleString(),
-    };
-
     const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    storedNotes.push(note);
-    localStorage.setItem("notes", JSON.stringify(storedNotes));
+
+    if (editNoteData) {
+      const updatedNotes = storedNotes.map((note) =>
+        note.id === editNoteData.id
+          ? {
+              ...note,
+              title: data.noteTitle,
+              content: data.noteContent,
+              updatedAt: new Date().toLocaleString(),
+            }
+          : note
+      );
+      localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    } else {
+      const newNote = {
+        id: Date.now(),
+        title: data.noteTitle,
+        content: data.noteContent,
+        isFavNote: false,
+        isLockedNote: false,
+        isDeletedNote: false,
+        createdAt: new Date().toLocaleString(),
+        updatedAt: new Date().toLocaleString(),
+      };
+      storedNotes.push(newNote);
+      localStorage.setItem("notes", JSON.stringify(storedNotes));
+    }
 
     handleClose();
     window.location.reload();
@@ -62,7 +95,9 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="formHeader">
-          <h2 className="formTitle">Add a New Note</h2>
+          <h2 className="formTitle">
+            {editNoteData ? "Edit Note" : "Add a New Note"}
+          </h2>
           <button type="button" className="closeButton" onClick={handleClose}>
             <img src={CloseIcon} alt="Close" />
           </button>
@@ -92,7 +127,7 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
 
         <div className="buttonContainer">
           <button type="submit" className="submitButton">
-            Add Note
+            {editNoteData ? "Update Note" : "Add Note"}
           </button>
         </div>
       </form>
