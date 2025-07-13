@@ -69,7 +69,7 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
         </div>
 
         {/* Note Content */}
-        <div className="formGroup">
+        <div className="formGroup textArea">
           <textarea
             id="noteContent"
             {...register("noteContent")}

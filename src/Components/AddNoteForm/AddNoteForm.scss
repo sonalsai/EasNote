@@ -111,9 +111,15 @@
       }
 
       textarea {
-        height: 300px;
+        height: 100%;
         resize: none;
       }
+    }
+
+    .textArea {
+      height: 100%;
+      min-height: 300px;
+      max-height: 600px;
     }
   }
 
