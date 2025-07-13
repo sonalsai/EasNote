@@ -10,7 +10,8 @@ const AddNoteForm = ({
   setEditNoteData,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
+  const [isSaved, setIsSaved] = useState(false);
+  const { register, handleSubmit, reset, watch } = useForm();
 
   useEffect(() => {
     if (editNoteData) {
@@ -33,16 +34,37 @@ const AddNoteForm = ({
   }, [showAddNoteForm]);
 
   const handleClose = () => {
+    //displaying modal when the form is not saved and has unsaved changes
+    if (
+      !isSaved &&
+      !editNoteData &&
+      (watch("noteTitle").trim() !== "" || watch("noteContent").trim() !== "")
+    ) {
+      console.warn("Note not saved yet, closing without saving.");
+    }
+
+    //displaying modal when the form is not saved and has unsaved changes in edit mode
+    if (
+      !isSaved &&
+      editNoteData &&
+      (watch("noteTitle").trim() !== editNoteData?.title ||
+        watch("noteContent").trim() !== editNoteData?.content)
+    ) {
+      console.warn("Edited Note not saved yet, closing without saving.");
+    }
+
     setIsVisible(false);
     setTimeout(() => {
       setEditNoteData(null);
       setShowAddNoteForm(false);
+      setIsSaved(false);
       reset();
     }, 300);
   };
 
-  const formSubmit = (data) => {
+  const handleSave = (data) => {
     if (data.noteTitle.trim() === "" && data.noteContent.trim() === "") {
+      setIsSaved(true);
       handleClose();
       return;
     }
@@ -60,6 +82,7 @@ const AddNoteForm = ({
             }
           : note
       );
+      setIsSaved(true);
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
     } else {
       const newNote = {
@@ -74,6 +97,7 @@ const AddNoteForm = ({
       };
       storedNotes.push(newNote);
       localStorage.setItem("notes", JSON.stringify(storedNotes));
+      setIsSaved(true);
     }
 
     handleClose();
@@ -91,7 +115,7 @@ const AddNoteForm = ({
     >
       <form
         className={`addNoteContainer ${isVisible ? "is-visible" : ""}`}
-        onSubmit={handleSubmit(formSubmit)}
+        onSubmit={handleSubmit(handleSave)}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="formHeader">
