@@ -3,6 +3,7 @@ import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
 import { useState } from "react";
+import { DialogType } from "../../enums";
 
 const Card = ({
   note,
@@ -10,6 +11,9 @@ const Card = ({
   setViewNoteData,
   setEditNoteData,
   setShowAddNoteForm,
+  setDeleteNoteId,
+  setShowDialogBox,
+  setDialogType,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
 
@@ -24,11 +28,13 @@ const Card = ({
   };
 
   //Delete note function can be added here
-  const handleDelete = (id) => {
-    const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    const updatedNotes = allNotes.filter((note) => note.id !== id);
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-    window.location.reload();
+  const handleDelete = (e,id) => {
+    e.stopPropagation();
+    setDeleteNoteId(id);
+    setShowDialogBox(true);
+    setDialogType(DialogType.CONFIRM_DELETE);
+    setShowOptions(false);
+
   };
 
   const handleNoteView = () => {
@@ -62,7 +68,7 @@ const Card = ({
                 <img src={EditNoteIcon} alt="" />
                 Edit
               </button>
-              <button className="deleteBtn" onClick={() => handleDelete(note?.id)}>
+              <button className="deleteBtn" onClick={(e) => handleDelete(e,note?.id)}>
                 <img src={DeleteIcon} alt="" />
                 Delete
               </button>
