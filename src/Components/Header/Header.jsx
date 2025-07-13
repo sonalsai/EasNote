@@ -1,4 +1,5 @@
 import "./Header.scss";
+import { HeaderOptions } from "../../enums";
 // import Logo from "../../assets/logo.png";
 import AddNotesIcon from "../../assets/addNotesIcon.svg";
 import AllNotesIcon from "../../assets/allNotesIcon.svg";
@@ -26,19 +27,19 @@ const Header = ({ setShowAddNoteForm }) => {
       <div className="noteOptionsContainer">
         <button className="noteOptionButton">
           <img src={AllNotesIcon} alt="" />
-          All Notes
+          {HeaderOptions.ALL_NOTES}
         </button>
         <button className="noteOptionButton">
           <img src={FavoriteNoteIcon} alt="" />
-          Favorites Notes
+          {HeaderOptions.FAVORITES}
         </button>
         <button className="noteOptionButton">
           <img src={LockedNoteIcon} alt="" />
-          Locked Notes
+          {HeaderOptions.LOCKED}
         </button>
         <button className="noteOptionButton">
           <img src={DeleteIcon} alt="" />
-          Recycle Bin</button>
+          {HeaderOptions.RECYCLE_BIN}</button>
       </div>
 
       {/* Add Note Button */}
