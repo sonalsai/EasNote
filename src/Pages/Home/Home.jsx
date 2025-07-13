@@ -46,7 +46,7 @@ const Home = () => {
       )}
 
       {/* View Note */}
-      {viewNote && <ViewNote note={viewNoteData} />}
+      {viewNote && <ViewNote note={viewNoteData} setViewNote={setViewNote} />}
     </div>
   );
 };
