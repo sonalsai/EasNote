@@ -64,12 +64,15 @@
         border: none;
         cursor: pointer;
         padding: 4px;
+        user-select: none;
 
         img {
           width: 28px;
           height: 28px;
           border-radius: 20px;
           padding: 2px;
+          user-select: none;
+          transition: all 0.2s ease-in-out;
 
           &:hover {
             background-color: rgba(255, 255, 255, 0.1);

@@ -1,32 +1,55 @@
 @use "sass:color";
 @use "../../styles/variables" as var;
 
-.addNoteForm {
+.addNoteOverlay {
   position: fixed;
-  top: 10%;
-  right: -100%;
   z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.addNoteContainer {
   width: 50%;
   height: 80%;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 20px;
   background-color: var.$secondary-background-color;
-  border-radius: 20px 0 0 20px;
+  border-radius: 8px;
   box-shadow: var.$box-shadow-soft;
-  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-y: auto;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
-  &.show {
-    right: 0;
+  &.is-visible {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   .formHeader {
+    width: 100%;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 60px;
 
     .formTitle {
       margin: 0;
@@ -36,13 +59,21 @@
     }
 
     .closeButton {
-      width: 30px;
-      height: 30px;
-      background-color: transparent;
+      width: fit-content;
+      background: transparent;
       border: none;
+      cursor: pointer;
+      padding: 4px;
 
-      &:hover {
-        color: var.$accent-color;
+      img {
+        width: 28px;
+        height: 28px;
+        border-radius: 20px;
+        padding: 2px;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
       }
     }
   }
@@ -141,7 +172,6 @@
       font-family: var.$font_family;
       font-size: 16px;
       font-weight: 500;
-      align-self: flex-end;
       cursor: pointer;
       transition: all 0.3s ease;
 

@@ -1,17 +1,31 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
 
 const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
-  const { register, handleSubmit } = useForm({
+  const [isVisible, setIsVisible] = useState(false);
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: { noteTitle: "", noteContent: "" },
   });
 
-  const formSubmit = (data) => {
-    console.log(data);
+  useEffect(() => {
+    if (showAddNoteForm) {
+      setIsVisible(true);
+    }
+  }, [showAddNoteForm]);
 
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setShowAddNoteForm(false);
+      reset();
+    }, 300);
+  };
+
+  const formSubmit = (data) => {
     if (data.noteTitle.trim() === "" && data.noteContent.trim() === "") {
-      closeForm();
+      handleClose();
       return;
     }
 
@@ -29,63 +43,60 @@ const AddNoteForm = ({ showAddNoteForm, setShowAddNoteForm }) => {
     storedNotes.push(note);
     localStorage.setItem("notes", JSON.stringify(storedNotes));
 
-    closeForm();
+    handleClose();
     window.location.reload();
   };
 
-  const closeForm = () => {
-    setShowAddNoteForm(false);
-  };
+  if (!showAddNoteForm) {
+    return null;
+  }
 
   return (
-    <form
-      className={`addNoteForm ${showAddNoteForm ? "show" : ""}`}
-      id="addNoteForm"
-      onSubmit={handleSubmit((data) => formSubmit(data))}
+    <div
+      className={`addNoteOverlay ${isVisible ? "is-visible" : ""}`}
+      onClick={handleClose}
     >
-      <div className="formHeader">
-        <h2 className="formTitle">Add a New Note</h2>
-        <button
-          type="button"
-          className="closeButton"
-          onClick={() => {
-            closeForm();
-          }}
-        >
-          <img src={CloseIcon} alt="" />
-        </button>
-      </div>
-      <div className="formFields">
-        {/* Note Title */}
-        <div className="formGroup">
-          <input
-            type="text"
-            id="noteTitle"
-            {...register("noteTitle")}
-            placeholder=" "
-            autoComplete="off"
-          />
-          <label htmlFor="noteTitle">Title</label>
+      <form
+        className={`addNoteContainer ${isVisible ? "is-visible" : ""}`}
+        onSubmit={handleSubmit(formSubmit)}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="formHeader">
+          <h2 className="formTitle">Add a New Note</h2>
+          <button type="button" className="closeButton" onClick={handleClose}>
+            <img src={CloseIcon} alt="Close" />
+          </button>
         </div>
 
-        {/* Note Content */}
-        <div className="formGroup textArea">
-          <textarea
-            id="noteContent"
-            {...register("noteContent")}
-            placeholder=" "
-          ></textarea>
-          <label htmlFor="noteContent">Content</label>
-        </div>
-      </div>
+        <div className="formFields">
+          <div className="formGroup">
+            <input
+              type="text"
+              id="noteTitle"
+              {...register("noteTitle")}
+              placeholder=" "
+              autoComplete="off"
+            />
+            <label htmlFor="noteTitle">Title</label>
+          </div>
 
-      {/* Submit Button */}
-      <div className="buttonContainer">
-        <button type="submit" className="submitButton">
-          Add Note
-        </button>
-      </div>
-    </form>
+          <div className="formGroup textArea">
+            <textarea
+              id="noteContent"
+              {...register("noteContent")}
+              placeholder=" "
+            ></textarea>
+            <label htmlFor="noteContent">Content</label>
+          </div>
+        </div>
+
+        <div className="buttonContainer">
+          <button type="submit" className="submitButton">
+            Add Note
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
