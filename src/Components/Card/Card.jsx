@@ -24,7 +24,6 @@ const Card = ({ note, setViewNote, setViewNoteData }) => {
   const handleNoteView = () => {
     setViewNote(true);
     setViewNoteData(note);
-    console.log("Note data set for viewing:", note); // Debugging log
   };
 
   return (

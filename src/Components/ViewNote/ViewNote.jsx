@@ -22,7 +22,6 @@ const ViewNote = ({ note, setViewNote }) => {
     return null;
   }
 
-  console.log("Viewing note:", note);
   return (
     <div
       className={`viewScreen ${isVisible ? "is-visible" : ""}`}
