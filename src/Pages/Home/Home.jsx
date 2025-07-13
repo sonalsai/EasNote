@@ -29,6 +29,8 @@ const Home = () => {
         setShowAddNoteForm={setShowAddNoteForm}
         editNoteData={editNoteData}
         setEditNoteData={setEditNoteData}
+        setShowDialogBox={setShowDialogBox}
+        setDialogType={setDialogType}
       />
 
       {/* No Notes Division */}
@@ -68,6 +70,9 @@ const Home = () => {
           setShowDialogBox={setShowDialogBox}
           setDialogType={setDialogType}
           setDeleteNoteId={setDeleteNoteId}
+          editNoteData={editNoteData}
+          setShowAddNoteForm={setShowAddNoteForm}
+          setEditNoteData={setEditNoteData}
         />
       )}
     </div>

@@ -15,6 +15,10 @@ const DialogBox = ({
   setShowDialogBox,
   setDialogType,
   setDeleteNoteId,
+  dialogAction,
+  editNoteData,
+  setShowAddNoteForm,
+  setEditNoteData,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -29,6 +33,9 @@ const DialogBox = ({
       const notes = JSON.parse(localStorage.getItem("notes")) || [];
       const updatedNotes = notes.filter((note) => note.id !== deleteNoteId);
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
+      setShowAddNoteForm(false);
+      setEditNoteData(null);
     }
     handleClose();
   };

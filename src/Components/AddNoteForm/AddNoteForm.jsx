@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { set, useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
+import { DialogType } from "../../enums";
 
 const AddNoteForm = ({
   showAddNoteForm,
   setShowAddNoteForm,
   editNoteData,
   setEditNoteData,
+  setShowDialogBox,
+  setDialogType,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -40,7 +43,10 @@ const AddNoteForm = ({
       !editNoteData &&
       (watch("noteTitle").trim() !== "" || watch("noteContent").trim() !== "")
     ) {
+      setShowDialogBox(true);
+      setDialogType(DialogType.CONFIRM_ADD_CLOSE);
       console.warn("Note not saved yet, closing without saving.");
+      return;
     }
 
     //displaying modal when the form is not saved and has unsaved changes in edit mode
@@ -50,7 +56,10 @@ const AddNoteForm = ({
       (watch("noteTitle").trim() !== editNoteData?.title ||
         watch("noteContent").trim() !== editNoteData?.content)
     ) {
+      setShowDialogBox(true);
+      setDialogType(DialogType.CONFIRM_EDIT_CLOSE);
       console.warn("Edited Note not saved yet, closing without saving.");
+      return;
     }
 
     setIsVisible(false);
@@ -61,7 +70,6 @@ const AddNoteForm = ({
       reset();
     }, 300);
   };
-
   const handleSave = (data) => {
     if (data.noteTitle.trim() === "" && data.noteContent.trim() === "") {
       setIsSaved(true);
