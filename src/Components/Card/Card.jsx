@@ -2,7 +2,7 @@ import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DialogType } from "../../enums";
 import { getTitle } from "../../utils/card";
 
@@ -17,6 +17,20 @@ const Card = ({
   setDialogType,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
+  const optionsRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+        setShowOptions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [optionsRef]);
 
   const handleDelete = (e, id) => {
     e.stopPropagation();
@@ -44,7 +58,7 @@ const Card = ({
     <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
         <h2>{getTitle(note)}</h2>
-        <div className="actionButtons">
+        <div className="actionButtons" ref={optionsRef}>
           <button
             className="moreBtn"
             onClick={(e) => {
