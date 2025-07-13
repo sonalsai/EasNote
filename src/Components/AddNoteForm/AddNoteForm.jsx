@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
 import { DialogType } from "../../enums";
