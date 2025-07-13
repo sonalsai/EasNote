@@ -2,6 +2,12 @@ import "./DialogBox.scss";
 import closeIcon from "../../assets/closeIcon.svg";
 import { useEffect, useState } from "react";
 import { DialogType } from "../../enums";
+import {
+  getActionBtnClass,
+  getActionBtnText,
+  getDialogMessage,
+  getDialogTitle,
+} from "../../utils/dialogBox";
 
 const DialogBox = ({
   deleteNoteId,
@@ -17,42 +23,6 @@ const DialogBox = ({
       setIsVisible(true);
     }
   }, [dialogType]);
-
-  const getDialogTitle = () => {
-    switch (dialogType) {
-      case DialogType.CONFIRM_DELETE:
-        return "Confirm Delete";
-      default:
-        return "Dialog Title";
-    }
-  };
-
-  const getDialogMessage = () => {
-    switch (dialogType) {
-      case DialogType.CONFIRM_DELETE:
-        return "Are you sure you want to delete this note? You won’t be able to get it back.";
-      default:
-        return "Are you sure?";
-    }
-  };
-
-  const getActionBtnClass = () => {
-    switch (dialogType) {
-      case DialogType.CONFIRM_DELETE:
-        return "deleteBtn";
-      default:
-        return "confirmBtn";
-    }
-  };
-
-  const getActionBtnText = () => {
-    switch (dialogType) {
-      case DialogType.CONFIRM_DELETE:
-        return "Delete";
-      default:
-        return "Confirm";
-    }
-  };
 
   const handleAction = () => {
     if (dialogType === DialogType.CONFIRM_DELETE) {
@@ -78,7 +48,7 @@ const DialogBox = ({
       <div className="dialogBox">
         {/* Header */}
         <div className="dialogHeader">
-          <h2>{getDialogTitle()}</h2>
+          <h2>{getDialogTitle(dialogType)}</h2>
           <button onClick={() => handleClose()}>
             <img src={closeIcon} alt="" />
           </button>
@@ -86,7 +56,7 @@ const DialogBox = ({
 
         {/* Content */}
         <div className="dialogContent">
-          <p>{getDialogMessage()}</p>
+          <p>{getDialogMessage(dialogType)}</p>
         </div>
 
         {/* Actions */}
@@ -95,10 +65,10 @@ const DialogBox = ({
             Cancel
           </button>
           <button
-            className={`actionBtn ${getActionBtnClass()}`}
+            className={`actionBtn ${getActionBtnClass(dialogType)}`}
             onClick={() => handleAction()}
           >
-            {getActionBtnText()}
+            {getActionBtnText(dialogType)}
           </button>
         </div>
       </div>
