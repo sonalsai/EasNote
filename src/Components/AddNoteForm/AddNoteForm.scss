@@ -145,6 +145,12 @@
         height: 100%;
         resize: none;
       }
+
+      .error-message {
+        color: red;
+        font-size: 12px;
+        padding-left: 5px;
+      }
     }
 
     .textArea {

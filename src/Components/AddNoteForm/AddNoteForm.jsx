@@ -14,7 +14,7 @@ const AddNoteForm = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const { register, handleSubmit, reset, watch } = useForm();
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
   useEffect(() => {
     if (!showAddNoteForm) {
@@ -151,11 +151,18 @@ const AddNoteForm = ({
             <input
               type="text"
               id="noteTitle"
-              {...register("noteTitle")}
+              {...register("noteTitle", {
+                maxLength: 25,
+              })}
               placeholder=" "
               autoComplete="off"
             />
             <label htmlFor="noteTitle">Title</label>
+            {errors.noteTitle && (
+              <span className="error-message">
+                Title cannot exceed 25 characters.
+              </span>
+            )}
           </div>
 
           <div className="formGroup textArea">
