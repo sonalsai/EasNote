@@ -14,3 +14,18 @@ export const getScreenTitle = (screenType) => {
       return "Notes";
   }
 };
+
+export const getNoNotesAvailableText = (screenType) => {
+  switch (screenType) {
+    case HeaderOptions.ALL_NOTES:
+      return "No Notes Available";
+    case HeaderOptions.FAVORITES:
+      return "No Favorite Notes Available";
+    case HeaderOptions.LOCKED:
+      return "No Locked Notes Available";
+    case HeaderOptions.RECYCLE_BIN:
+      return "No Deleted Notes Available";
+    default:
+      return "No Notes Available";
+  }
+};

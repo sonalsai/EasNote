@@ -6,7 +6,7 @@ import Card from "../../Components/Card/Card";
 import ViewNote from "../../Components/ViewNote/ViewNote";
 import DialogBox from "../../Components/DialogBox/DialogBox";
 import { HeaderOptions } from "../../enums";
-import { getScreenTitle } from "../../utils/home";
+import { getNoNotesAvailableText, getScreenTitle } from "../../utils/home";
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
   const [viewNote, setViewNote] = useState(false);
@@ -32,21 +32,6 @@ const Home = () => {
         return allNotesFromLocalStorage.filter((note) => note.isDeletedNote);
       default:
         return [];
-    }
-  };
-
-  const noNotesAvailableText = () => {
-    switch (screenType) {
-      case HeaderOptions.ALL_NOTES:
-        return "No Notes Available";
-      case HeaderOptions.FAVORITES:
-        return "No Favorite Notes Available";
-      case HeaderOptions.LOCKED:
-        return "No Locked Notes Available";
-      case HeaderOptions.RECYCLE_BIN:
-        return "No Deleted Notes Available";
-      default:
-        return "No Notes Available";
     }
   };
 
@@ -76,7 +61,7 @@ const Home = () => {
 
           {/* No Notes Division */}
           {notesToDisplay().length === 0 && (
-            <div className="noNotes">{noNotesAvailableText()}</div>
+            <div className="noNotes">{getNoNotesAvailableText(screenType)}</div>
           )}
 
           {/* Note Container Division */}

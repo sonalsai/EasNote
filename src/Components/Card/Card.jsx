@@ -120,12 +120,9 @@ const Card = ({
               </button>
 
               {/* Locked Note */}
-              <button
-                className="favBtn"
-                onClick={(e) => handleLock(e, note)}
-              >
+              <button className="lockBtn" onClick={(e) => handleLock(e, note)}>
                 <img src={LockedNoteIcon} alt="" />
-                {note.isLockedNote ? "UnLock Note" : "Lock Note"}
+                {note.isLockedNote ? "Unlock Note" : "Lock Note"}
               </button>
 
               {/* Delete Note */}
