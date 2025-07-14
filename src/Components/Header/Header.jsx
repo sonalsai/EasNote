@@ -7,7 +7,7 @@ import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 
-const Header = ({ setShowAddNoteForm }) => {
+const Header = ({ setShowAddNoteForm, setScreenType }) => {
   return (
     <div className="headerContainer">
       {/* Title */}
@@ -25,21 +25,34 @@ const Header = ({ setShowAddNoteForm }) => {
 
       {/* Note Options */}
       <div className="noteOptionsContainer">
-        <button className="noteOptionButton">
+        <button
+          className="noteOptionButton"
+          onClick={() => setScreenType(HeaderOptions.ALL_NOTES)}
+        >
           <img src={AllNotesIcon} alt="" />
           {HeaderOptions.ALL_NOTES}
         </button>
-        <button className="noteOptionButton">
+        <button
+          className="noteOptionButton"
+          onClick={() => setScreenType(HeaderOptions.FAVORITES)}
+        >
           <img src={FavoriteNoteIcon} alt="" />
           {HeaderOptions.FAVORITES}
         </button>
-        <button className="noteOptionButton">
+        <button
+          className="noteOptionButton"
+          onClick={() => setScreenType(HeaderOptions.LOCKED)}
+        >
           <img src={LockedNoteIcon} alt="" />
           {HeaderOptions.LOCKED}
         </button>
-        <button className="noteOptionButton">
+        <button
+          className="noteOptionButton"
+          onClick={() => setScreenType(HeaderOptions.RECYCLE_BIN)}
+        >
           <img src={DeleteIcon} alt="" />
-          {HeaderOptions.RECYCLE_BIN}</button>
+          {HeaderOptions.RECYCLE_BIN}
+        </button>
       </div>
 
       {/* Add Note Button */}

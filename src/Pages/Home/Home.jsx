@@ -5,6 +5,8 @@ import AddNoteForm from "../../Components/AddNoteForm/AddNoteForm";
 import Card from "../../Components/Card/Card";
 import ViewNote from "../../Components/ViewNote/ViewNote";
 import DialogBox from "../../Components/DialogBox/DialogBox";
+import { HeaderOptions } from "../../enums";
+import { getScreenTitle } from "../../utils/home";
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
   const [viewNote, setViewNote] = useState(false);
@@ -13,6 +15,7 @@ const Home = () => {
   const [deleteNoteId, setDeleteNoteId] = useState(null);
   const [showDialogBox, setShowDialogBox] = useState(false);
   const [dialogType, setDialogType] = useState("");
+  const [screenType, setScreenType] = useState(HeaderOptions.ALL_NOTES);
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
@@ -21,7 +24,10 @@ const Home = () => {
     <div className="homeContainer">
       {/* Header Division */}
       <div className="HeaderDivision">
-        <Header setShowAddNoteForm={setShowAddNoteForm} />
+        <Header
+          setShowAddNoteForm={setShowAddNoteForm}
+          setScreenType={setScreenType}
+        />
       </div>
 
       <AddNoteForm
@@ -33,31 +39,38 @@ const Home = () => {
         setDialogType={setDialogType}
       />
 
-      {/* No Notes Division */}
-      {allNotesFromLocalStorage.length === 0 && (
-        <div className="noNotes">No Notes Available</div>
-      )}
+      <div className="mainScreen">
+        {/* Screen Title */}
+        <div className="screenTitle">{getScreenTitle(screenType)}</div>
 
-      {/* Note Container Division */}
-      {allNotesFromLocalStorage.length > 0 && (
-        <div className="noteContainer">
-          {allNotesFromLocalStorage.map((note) => {
-            return (
-              <Card
-                key={note.id}
-                note={note}
-                setViewNote={setViewNote}
-                setViewNoteData={setViewNoteData}
-                setEditNoteData={setEditNoteData}
-                setShowAddNoteForm={setShowAddNoteForm}
-                setDeleteNoteId={setDeleteNoteId}
-                setShowDialogBox={setShowDialogBox}
-                setDialogType={setDialogType}
-              />
-            );
-          })}
-        </div>
-      )}
+        {/* No Notes Division */}
+        {screenType === HeaderOptions.ALL_NOTES &&
+          allNotesFromLocalStorage.length === 0 && (
+            <div className="noNotes">No Notes Available</div>
+          )}
+
+        {/* Note Container Division */}
+        {screenType === HeaderOptions.ALL_NOTES &&
+          allNotesFromLocalStorage.length > 0 && (
+            <div className="noteContainer">
+              {allNotesFromLocalStorage.map((note) => {
+                return (
+                  <Card
+                    key={note.id}
+                    note={note}
+                    setViewNote={setViewNote}
+                    setViewNoteData={setViewNoteData}
+                    setEditNoteData={setEditNoteData}
+                    setShowAddNoteForm={setShowAddNoteForm}
+                    setDeleteNoteId={setDeleteNoteId}
+                    setShowDialogBox={setShowDialogBox}
+                    setDialogType={setDialogType}
+                  />
+                );
+              })}
+            </div>
+          )}
+      </div>
 
       {/* View Note */}
       {viewNote && <ViewNote note={viewNoteData} setViewNote={setViewNote} />}
