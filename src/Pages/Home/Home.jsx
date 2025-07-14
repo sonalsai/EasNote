@@ -19,6 +19,10 @@ const Home = () => {
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
+  const allTrashNotesFromLocalStorage =
+    JSON.parse(localStorage.getItem("trash")) || [];
+
+    console.log(allTrashNotesFromLocalStorage)
 
   const notesToDisplay = () => {
     switch (screenType) {
@@ -29,7 +33,7 @@ const Home = () => {
       case HeaderOptions.LOCKED:
         return allNotesFromLocalStorage.filter((note) => note.isLockedNote);
       case HeaderOptions.RECYCLE_BIN:
-        return allNotesFromLocalStorage.filter((note) => note.isDeletedNote);
+        return allTrashNotesFromLocalStorage;
       default:
         return [];
     }

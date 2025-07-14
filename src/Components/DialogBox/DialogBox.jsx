@@ -32,6 +32,12 @@ const DialogBox = ({
     if (dialogType === DialogType.CONFIRM_DELETE) {
       const notes = JSON.parse(localStorage.getItem("notes")) || [];
       const updatedNotes = notes.filter((note) => note.id !== deleteNoteId);
+      const deletedNote = notes.find((note) => note.id === deleteNoteId);
+      deletedNote.isDeletedNote = true;
+      const trashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+      trashNotes.push(deletedNote);
+      
+      localStorage.setItem("trash", JSON.stringify(trashNotes));
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
     } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
       setShowAddNoteForm(false);
