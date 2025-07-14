@@ -81,6 +81,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Sonal - [@sonal_sai___](https://www.instagram.com/sonal_sai___/)
+Sonal Sai - [@sonal_sai___](https://www.instagram.com/sonal_sai___/)
 
 Project Link: [https://github.com/sonalsai/EazNote](https://github.com/sonalsai/EazNote)
