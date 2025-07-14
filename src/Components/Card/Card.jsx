@@ -2,6 +2,7 @@ import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
 import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
+import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
 import { useState, useEffect, useRef } from "react";
 import { DialogType } from "../../enums";
@@ -65,6 +66,23 @@ const Card = ({
       }
       return n;
     });
+
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    setShowOptions(false);
+    window.location.reload();
+  };
+
+  const handleLock = (e, note) => {
+    e.stopPropagation();
+
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const updatedNotes = notes.map((n) => {
+      if (n.id === note.id) {
+        return { ...n, isLockedNote: !n.isLockedNote };
+      }
+      return n;
+    });
+
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
     setShowOptions(false);
     window.location.reload();
@@ -86,17 +104,31 @@ const Card = ({
           </button>
           {showOptions && (
             <div className="optionsDropdown">
+              {/* Edit Note */}
               <button className="editBtn" onClick={(e) => handleEdit(e)}>
                 <img src={EditNoteIcon} alt="" />
                 Edit
               </button>
+
+              {/* Favorite Note */}
               <button
-                className="editBtn"
+                className="favBtn"
                 onClick={(e) => handleFavorite(e, note)}
               >
                 <img src={FavoriteNoteIcon} alt="" />
                 {note.isFavNote ? "Unfavorite" : "Favorite"}
               </button>
+
+              {/* Locked Note */}
+              <button
+                className="favBtn"
+                onClick={(e) => handleLock(e, note)}
+              >
+                <img src={LockedNoteIcon} alt="" />
+                {note.isLockedNote ? "UnLock Note" : "Lock Note"}
+              </button>
+
+              {/* Delete Note */}
               <button
                 className="deleteBtn"
                 onClick={(e) => handleDelete(e, note?.id)}

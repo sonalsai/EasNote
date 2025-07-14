@@ -27,9 +27,9 @@ const Home = () => {
       case HeaderOptions.FAVORITES:
         return allNotesFromLocalStorage.filter((note) => note.isFavNote);
       case HeaderOptions.LOCKED:
-        return allNotesFromLocalStorage.filter((note) => note.isLocked);
+        return allNotesFromLocalStorage.filter((note) => note.isLockedNote);
       case HeaderOptions.RECYCLE_BIN:
-        return allNotesFromLocalStorage.filter((note) => note.isDeleted);
+        return allNotesFromLocalStorage.filter((note) => note.isDeletedNote);
       default:
         return [];
     }
