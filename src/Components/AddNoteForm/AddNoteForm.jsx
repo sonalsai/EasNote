@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import CloseIcon from "../../assets/closeIcon.svg";
 import "./AddNoteForm.scss";
@@ -13,19 +13,25 @@ const AddNoteForm = ({
   setDialogType,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+  const isSaved = useRef(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (!showAddNoteForm) {
       setIsVisible(false);
       setTimeout(() => {
         setEditNoteData(null);
-        setIsSaved(false);
+        isSaved.current = false;
         reset();
       }, 300);
     }
-  }, [showAddNoteForm, setEditNoteData, reset, setIsSaved, setShowAddNoteForm]);
+  }, [showAddNoteForm, setEditNoteData, reset, setShowAddNoteForm]);
 
   useEffect(() => {
     if (editNoteData) {
@@ -50,7 +56,7 @@ const AddNoteForm = ({
   const handleClose = () => {
     //displaying modal when the form is not saved and has unsaved changes
     if (
-      !isSaved &&
+      !isSaved.current &&
       !editNoteData &&
       (watch("noteTitle").trim() !== "" || watch("noteContent").trim() !== "")
     ) {
@@ -62,7 +68,7 @@ const AddNoteForm = ({
 
     //displaying modal when the form is not saved and has unsaved changes in edit mode
     if (
-      !isSaved &&
+      !isSaved.current &&
       editNoteData &&
       (watch("noteTitle").trim() !== editNoteData?.title ||
         watch("noteContent").trim() !== editNoteData?.content)
@@ -77,13 +83,13 @@ const AddNoteForm = ({
     setTimeout(() => {
       setEditNoteData(null);
       setShowAddNoteForm(false);
-      setIsSaved(false);
+      isSaved.current = false;
       reset();
     }, 300);
   };
   const handleSave = (data) => {
     if (data.noteTitle.trim() === "" && data.noteContent.trim() === "") {
-      setIsSaved(true);
+      isSaved.current = true;
       handleClose();
       return;
     }
@@ -101,7 +107,7 @@ const AddNoteForm = ({
             }
           : note
       );
-      setIsSaved(true);
+      isSaved.current = true;
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
     } else {
       const newNote = {
@@ -116,7 +122,7 @@ const AddNoteForm = ({
       };
       storedNotes.push(newNote);
       localStorage.setItem("notes", JSON.stringify(storedNotes));
-      setIsSaved(true);
+      isSaved.current = true;
     }
 
     handleClose();
