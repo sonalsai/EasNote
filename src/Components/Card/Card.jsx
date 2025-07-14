@@ -1,6 +1,7 @@
 import "./Card.scss";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 import EditNoteIcon from "../../assets/editNoteIcon.svg";
+import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
 import { useState, useEffect, useRef } from "react";
 import { DialogType } from "../../enums";
@@ -54,6 +55,21 @@ const Card = ({
     setViewNoteData(null);
   };
 
+  const handleFavorite = (e, note) => {
+    e.stopPropagation();
+
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const updatedNotes = notes.map((n) => {
+      if (n.id === note.id) {
+        return { ...n, isFavNote: !n.isFavNote };
+      }
+      return n;
+    });
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    setShowOptions(false);
+    window.location.reload();
+  };
+
   return (
     <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
@@ -73,6 +89,13 @@ const Card = ({
               <button className="editBtn" onClick={(e) => handleEdit(e)}>
                 <img src={EditNoteIcon} alt="" />
                 Edit
+              </button>
+              <button
+                className="editBtn"
+                onClick={(e) => handleFavorite(e, note)}
+              >
+                <img src={FavoriteNoteIcon} alt="" />
+                {note.isFavNote ? "Unfavorite" : "Favorite"}
               </button>
               <button
                 className="deleteBtn"

@@ -20,6 +20,36 @@ const Home = () => {
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
 
+  const notesToDisplay = () => {
+    switch (screenType) {
+      case HeaderOptions.ALL_NOTES:
+        return allNotesFromLocalStorage;
+      case HeaderOptions.FAVORITES:
+        return allNotesFromLocalStorage.filter((note) => note.isFavNote);
+      case HeaderOptions.LOCKED:
+        return allNotesFromLocalStorage.filter((note) => note.isLocked);
+      case HeaderOptions.RECYCLE_BIN:
+        return allNotesFromLocalStorage.filter((note) => note.isDeleted);
+      default:
+        return [];
+    }
+  };
+
+  const noNotesAvailableText = () => {
+    switch (screenType) {
+      case HeaderOptions.ALL_NOTES:
+        return "No Notes Available";
+      case HeaderOptions.FAVORITES:
+        return "No Favorite Notes Available";
+      case HeaderOptions.LOCKED:
+        return "No Locked Notes Available";
+      case HeaderOptions.RECYCLE_BIN:
+        return "No Deleted Notes Available";
+      default:
+        return "No Notes Available";
+    }
+  };
+
   return (
     <div className="homeContainer">
       {/* Header Division */}
@@ -40,20 +70,19 @@ const Home = () => {
       />
 
       <div className="mainScreen">
-        {/* Screen Title */}
-        <div className="screenTitle">{getScreenTitle(screenType)}</div>
+        <div className="notesDisplayContainer">
+          {/* Screen Title */}
+          <div className="screenTitle">{getScreenTitle(screenType)}</div>
 
-        {/* No Notes Division */}
-        {screenType === HeaderOptions.ALL_NOTES &&
-          allNotesFromLocalStorage.length === 0 && (
-            <div className="noNotes">No Notes Available</div>
+          {/* No Notes Division */}
+          {notesToDisplay().length === 0 && (
+            <div className="noNotes">{noNotesAvailableText()}</div>
           )}
 
-        {/* Note Container Division */}
-        {screenType === HeaderOptions.ALL_NOTES &&
-          allNotesFromLocalStorage.length > 0 && (
+          {/* Note Container Division */}
+          {notesToDisplay().length > 0 && (
             <div className="noteContainer">
-              {allNotesFromLocalStorage.map((note) => {
+              {notesToDisplay().map((note) => {
                 return (
                   <Card
                     key={note.id}
@@ -70,6 +99,7 @@ const Home = () => {
               })}
             </div>
           )}
+        </div>
       </div>
 
       {/* View Note */}

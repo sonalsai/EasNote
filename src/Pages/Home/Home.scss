@@ -9,15 +9,23 @@
     width: fit-content;
   }
 
+  .notesDisplayContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+
   .screenTitle {
-    width: fit-content;
+    width: 100%;
     height: fit-content;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     font-family: var.$font_family;
     font-size: 24px;
     font-weight: 500;
     color: var.$primary-text-color;
-    text-align: center;
+    text-align: left;
     background-color: var.$background-color;
   }
 
@@ -39,6 +47,10 @@
 
   .noNotes {
     width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     align-self: center;
     align-content: center;
