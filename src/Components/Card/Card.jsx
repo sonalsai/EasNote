@@ -4,6 +4,7 @@ import EditNoteIcon from "../../assets/editNoteIcon.svg";
 import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import MoreIcon from "../../assets/moreIcon.svg";
+import RestoreIcon from "../../assets/restoreIcon.svg";
 import { useState, useEffect, useRef } from "react";
 import { DialogType } from "../../enums";
 import { getTitle } from "../../utils/card";
@@ -88,6 +89,22 @@ const Card = ({
     window.location.reload();
   };
 
+  const handleRestore = (e, id) => {
+    e.stopPropagation();
+
+    const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+    const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+    const updatedTrashNotes = allTrashNotes.filter((note) => note.id !== id);
+    const trashNote = allTrashNotes.find((note) => note.id === id);
+    trashNote.isDeletedNote = false;
+    const updatedNotes = [...allNotes, trashNote];
+
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    localStorage.setItem("trash", JSON.stringify(updatedTrashNotes));
+    setShowOptions(false);
+    window.location.reload();
+  };
+
   return (
     <div className="cardContainer" onClick={() => handleNoteView()}>
       <div className="cardHeader">
@@ -105,33 +122,56 @@ const Card = ({
           {showOptions && (
             <div className="optionsDropdown">
               {/* Edit Note */}
-              <button className="editBtn" onClick={(e) => handleEdit(e)}>
-                <img src={EditNoteIcon} alt="" />
-                Edit
-              </button>
+              {!note.isDeletedNote && (
+                <button className="editBtn" onClick={(e) => handleEdit(e)}>
+                  <img src={EditNoteIcon} alt="" />
+                  Edit
+                </button>
+              )}
 
               {/* Favorite Note */}
-              <button
-                className="favBtn"
-                onClick={(e) => handleFavorite(e, note)}
-              >
-                <img src={FavoriteNoteIcon} alt="" />
-                {note.isFavNote ? "Unfavorite" : "Favorite"}
-              </button>
+              {!note.isDeletedNote && (
+                <button
+                  className="favBtn"
+                  onClick={(e) => handleFavorite(e, note)}
+                >
+                  <img src={FavoriteNoteIcon} alt="" />
+                  {note.isFavNote ? "Unfavorite" : "Favorite"}
+                </button>
+              )}
 
               {/* Locked Note */}
-              <button className="lockBtn" onClick={(e) => handleLock(e, note)}>
-                <img src={LockedNoteIcon} alt="" />
-                {note.isLockedNote ? "Unlock Note" : "Lock Note"}
-              </button>
+              {!note.isDeletedNote && (
+                <button
+                  className="lockBtn"
+                  onClick={(e) => handleLock(e, note)}
+                >
+                  <img src={LockedNoteIcon} alt="" />
+                  {note.isLockedNote ? "Unlock Note" : "Lock Note"}
+                </button>
+              )}
+
+              {/* Restore Note */}
+              {note.isDeletedNote && (
+                <button
+                  className="restoreBtn"
+                  onClick={(e) => {
+                    handleRestore(e, note.id);
+                  }}
+                >
+                  <img src={RestoreIcon} alt="" />
+                  Restore
+                </button>
+              )}
 
               {/* Delete Note */}
               <button
                 className="deleteBtn"
                 onClick={(e) => handleDelete(e, note?.id)}
+                style={{ whiteSpace: "nowrap" }}
               >
                 <img src={DeleteIcon} alt="" />
-                Delete
+                {!note.isDeletedNote ? "Move to Trash" : "Delete"}
               </button>
             </div>
           )}

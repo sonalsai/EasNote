@@ -22,8 +22,6 @@ const Home = () => {
   const allTrashNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("trash")) || [];
 
-    console.log(allTrashNotesFromLocalStorage)
-
   const notesToDisplay = () => {
     switch (screenType) {
       case HeaderOptions.ALL_NOTES:

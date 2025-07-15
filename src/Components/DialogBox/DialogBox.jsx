@@ -30,15 +30,33 @@ const DialogBox = ({
 
   const handleAction = () => {
     if (dialogType === DialogType.CONFIRM_DELETE) {
-      const notes = JSON.parse(localStorage.getItem("notes")) || [];
-      const updatedNotes = notes.filter((note) => note.id !== deleteNoteId);
-      const deletedNote = notes.find((note) => note.id === deleteNoteId);
-      deletedNote.isDeletedNote = true;
-      const trashNotes = JSON.parse(localStorage.getItem("trash")) || [];
-      trashNotes.push(deletedNote);
+      const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+      const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+      const combinedNotes = [...allNotes, ...allTrashNotes];
+      const deletedNote = combinedNotes.find(
+        (note) => note.id === deleteNoteId
+      );
       
-      localStorage.setItem("trash", JSON.stringify(trashNotes));
-      localStorage.setItem("notes", JSON.stringify(updatedNotes));
+      if (!deletedNote) return;
+      if (deletedNote.isDeletedNote) {
+        const updatedNotes = allTrashNotes.filter(
+          (note) => note.id !== deleteNoteId
+        );
+        localStorage.setItem("trash", JSON.stringify(updatedNotes));
+        setShowDialogBox(false);
+      } else {
+        const deletedNote = allNotes.find((note) => note.id === deleteNoteId);
+        const updatedNotes = allNotes.filter(
+          (note) => note.id !== deleteNoteId
+        );
+        deletedNote.isDeletedNote = true;
+        const trashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+        trashNotes.push(deletedNote);
+
+        localStorage.setItem("trash", JSON.stringify(trashNotes));
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+      }
+      window.location.reload();
     } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
       setShowAddNoteForm(false);
       setEditNoteData(null);
