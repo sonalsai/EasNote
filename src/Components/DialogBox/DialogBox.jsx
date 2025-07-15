@@ -15,8 +15,6 @@ const DialogBox = ({
   setShowDialogBox,
   setDialogType,
   setDeleteNoteId,
-  dialogAction,
-  editNoteData,
   setShowAddNoteForm,
   setEditNoteData,
 }) => {
