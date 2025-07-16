@@ -21,34 +21,84 @@
     width: 100%;
     height: fit-content;
     padding: 20px 20px 0 20px;
-    font-family: var.$font_family;
-    font-size: 24px;
-    font-weight: 500;
-    color: var.$primary-text-color;
-    text-align: left;
     background-color: var.$background-color;
-  }
 
-  .noteContainer {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: fit-content;
-    padding: 20px;
-    overflow-y: auto;
-    gap: 20px;
-    justify-content: start;
-  }
+    .hamburgerIcon {
+      display: none;
+    }
 
-  .noNotes {
-    width: 100%;
+    h2 {
+      font-family: var.$font_family;
+      font-size: 24px;
+      font-weight: 500;
+      color: var.$primary-text-color;
+      text-align: left;
+    }
+
+    @media screen and (max-width: var.$breakpoint-md) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px 10px 10px;
+      gap: 20px;
+
+      .hamburgerIcon {
+        display: block;
+        width: fit-content;
+        height: fit-content;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        img {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+  }
+}
+
+.noteContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+  overflow-y: auto;
+  gap: 20px;
+  justify-content: start;
+}
+
+.noNotes {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  align-content: center;
+  user-select: none;
+}
+
+@media screen and (max-width: var.$breakpoint-md) {
+  .HeaderDivision {
+    position: absolute;
+    z-index: 10;
+    background-color: var.$background-color;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    align-self: center;
-    align-content: center;
-    user-select: none;
+    &.mobile-header {
+      animation: slideIn 0.3s forwards;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 }

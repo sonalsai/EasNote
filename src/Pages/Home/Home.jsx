@@ -7,6 +7,9 @@ import ViewNote from "../../Components/ViewNote/ViewNote";
 import DialogBox from "../../Components/DialogBox/DialogBox";
 import { HeaderOptions } from "../../enums";
 import { getNoNotesAvailableText, getScreenTitle } from "../../utils/home";
+import useWindowSize from "../../utils/useWindowSize";
+import hamburgerIcon from "../../assets/hamburgerIcon.svg";
+
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
   const [viewNote, setViewNote] = useState(false);
@@ -16,6 +19,9 @@ const Home = () => {
   const [showDialogBox, setShowDialogBox] = useState(false);
   const [dialogType, setDialogType] = useState("");
   const [screenType, setScreenType] = useState(HeaderOptions.ALL_NOTES);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+
+  const isMobile = useWindowSize();
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
@@ -39,13 +45,15 @@ const Home = () => {
 
   return (
     <div className="homeContainer">
-      {/* Header Division */}
-      <div className="HeaderDivision">
-        <Header
-          setShowAddNoteForm={setShowAddNoteForm}
-          setScreenType={setScreenType}
-        />
-      </div>
+      {((isMobile && isHeaderVisible) || !isMobile) && (
+        <div className={`HeaderDivision ${isMobile ? "mobile-header" : ""}`}>
+          <Header
+            setShowAddNoteForm={setShowAddNoteForm}
+            setScreenType={setScreenType}
+            setIsHeaderVisible={setIsHeaderVisible}
+          />
+        </div>
+      )}
 
       <AddNoteForm
         showAddNoteForm={showAddNoteForm}
@@ -59,7 +67,17 @@ const Home = () => {
       <div className="mainScreen">
         <div className="notesDisplayContainer">
           {/* Screen Title */}
-          <div className="screenTitle">{getScreenTitle(screenType)}</div>
+          <div className="screenTitle">
+            {isMobile && (
+              <button
+                className="hamburgerIcon"
+                onClick={() => setIsHeaderVisible(true)}
+              >
+                <img src={hamburgerIcon} alt="menu" />
+              </button>
+            )}
+            <h2>{getScreenTitle(screenType)}</h2>
+          </div>
 
           {/* No Notes Division */}
           {notesToDisplay().length === 0 && (

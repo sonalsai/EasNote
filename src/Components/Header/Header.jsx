@@ -7,7 +7,14 @@ import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 
-const Header = ({ setShowAddNoteForm, setScreenType }) => {
+const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
+  const handleOptionClick = (screenType) => {
+    setScreenType(screenType);
+    if (setIsHeaderVisible) {
+      setIsHeaderVisible(false);
+    }
+  };
+
   return (
     <div className="headerContainer">
       <div className="topContainer">
@@ -28,28 +35,28 @@ const Header = ({ setShowAddNoteForm, setScreenType }) => {
         <div className="noteOptionsContainer">
           <button
             className="noteOptionButton"
-            onClick={() => setScreenType(HeaderOptions.ALL_NOTES)}
+            onClick={() => handleOptionClick(HeaderOptions.ALL_NOTES)}
           >
             <img src={AllNotesIcon} alt="" />
             {HeaderOptions.ALL_NOTES}
           </button>
           <button
             className="noteOptionButton"
-            onClick={() => setScreenType(HeaderOptions.FAVORITES)}
+            onClick={() => handleOptionClick(HeaderOptions.FAVORITES)}
           >
             <img src={FavoriteNoteIcon} alt="" />
             {HeaderOptions.FAVORITES}
           </button>
           <button
             className="noteOptionButton"
-            onClick={() => setScreenType(HeaderOptions.LOCKED)}
+            onClick={() => handleOptionClick(HeaderOptions.LOCKED)}
           >
             <img src={LockedNoteIcon} alt="" />
             {HeaderOptions.LOCKED}
           </button>
           <button
             className="noteOptionButton"
-            onClick={() => setScreenType(HeaderOptions.RECYCLE_BIN)}
+            onClick={() => handleOptionClick(HeaderOptions.RECYCLE_BIN)}
           >
             <img src={DeleteIcon} alt="" />
             {HeaderOptions.RECYCLE_BIN}
@@ -61,7 +68,12 @@ const Header = ({ setShowAddNoteForm, setScreenType }) => {
       <div className="addNoteButtonContainer">
         <button
           className="addNoteButton"
-          onClick={() => setShowAddNoteForm(true)}
+          onClick={() => {
+            setShowAddNoteForm(true);
+            if (setIsHeaderVisible) {
+              setIsHeaderVisible(false);
+            }
+          }}
         >
           {" "}
           <img src={AddNotesIcon} alt="" className="addNoteIcon" />
