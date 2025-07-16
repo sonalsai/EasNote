@@ -18,6 +18,10 @@
     width: 280px;
   }
 
+  @media screen and (max-width: var.$breakpoint-md) {
+    width: 320px;
+  }
+
   .topContainer {
     display: flex;
     flex-direction: column;
