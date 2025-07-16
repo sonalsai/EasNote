@@ -13,7 +13,11 @@
   box-shadow: var.$box-shadow-medium;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: var.$breakpoint-xxxl) {
+    max-width: 280px;
+  }
+
+  @media screen and (max-width: var.$breakpoint-xxl) {
     max-width: 255px;
   }
 
