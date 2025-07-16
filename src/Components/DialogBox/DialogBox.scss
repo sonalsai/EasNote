@@ -33,6 +33,10 @@
     justify-content: center;
     gap: 20px;
 
+    @media screen and (max-width: 1440px) {
+      height: 24%;
+    }
+
     .dialogHeader {
       width: 100%;
       height: fit-content;
