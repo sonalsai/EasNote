@@ -21,6 +21,11 @@
     max-width: 255px;
   }
 
+  @media screen and (max-width: var.$breakpoint-xl) {
+    max-width: 216px;
+    min-width: 200px;
+  }
+
   @media screen and (max-width: var.$breakpoint-sm) {
     min-width: 100%;
   }

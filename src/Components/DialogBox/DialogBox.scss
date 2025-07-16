@@ -33,8 +33,13 @@
     justify-content: center;
     gap: 20px;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: var.$breakpoint-xxl) {
       height: 24%;
+    }
+
+    @media screen and (max-width: var.$breakpoint-xl) {
+      width: 40%;
+      height: 26%;
     }
 
     .dialogHeader {
