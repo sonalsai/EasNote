@@ -3,9 +3,9 @@
 .cardContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 300px;
+  flex: 1;
   min-width: 220px;
+  max-width: 300px;
   max-height: 220px;
   padding: 10px 12px;
   background: var.$secondary-background-color;
@@ -13,10 +13,8 @@
   box-shadow: var.$box-shadow-medium;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  @media screen and (max-width: var.$breakpoint-xl) {
-    max-width: 100%;
+  @media screen and (max-width: var.$breakpoint-sm) {
     min-width: 100%;
-    max-height: 300px;
   }
 
   &:hover {
