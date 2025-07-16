@@ -10,49 +10,51 @@ import DeleteIcon from "../../assets/deleteIcon.svg";
 const Header = ({ setShowAddNoteForm, setScreenType }) => {
   return (
     <div className="headerContainer">
-      {/* Title */}
-      <div className="titleContainer">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
-          alt="EazNote Logo"
-          className="headerLogo"
-        />
-        <div className="textContainer">
-          <h1 className="headerTitle">EazNote</h1>
-          <span className="headerSubtitle">Your Easy Note-Taking App</span>
+      <div className="topContainer">
+        {/* Title */}
+        <div className="titleContainer">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
+            alt="EazNote Logo"
+            className="headerLogo"
+          />
+          <div className="textContainer">
+            <h1 className="headerTitle">EazNote</h1>
+            <span className="headerSubtitle">Your Easy Note-Taking App</span>
+          </div>
         </div>
-      </div>
 
-      {/* Note Options */}
-      <div className="noteOptionsContainer">
-        <button
-          className="noteOptionButton"
-          onClick={() => setScreenType(HeaderOptions.ALL_NOTES)}
-        >
-          <img src={AllNotesIcon} alt="" />
-          {HeaderOptions.ALL_NOTES}
-        </button>
-        <button
-          className="noteOptionButton"
-          onClick={() => setScreenType(HeaderOptions.FAVORITES)}
-        >
-          <img src={FavoriteNoteIcon} alt="" />
-          {HeaderOptions.FAVORITES}
-        </button>
-        <button
-          className="noteOptionButton"
-          onClick={() => setScreenType(HeaderOptions.LOCKED)}
-        >
-          <img src={LockedNoteIcon} alt="" />
-          {HeaderOptions.LOCKED}
-        </button>
-        <button
-          className="noteOptionButton"
-          onClick={() => setScreenType(HeaderOptions.RECYCLE_BIN)}
-        >
-          <img src={DeleteIcon} alt="" />
-          {HeaderOptions.RECYCLE_BIN}
-        </button>
+        {/* Note Options */}
+        <div className="noteOptionsContainer">
+          <button
+            className="noteOptionButton"
+            onClick={() => setScreenType(HeaderOptions.ALL_NOTES)}
+          >
+            <img src={AllNotesIcon} alt="" />
+            {HeaderOptions.ALL_NOTES}
+          </button>
+          <button
+            className="noteOptionButton"
+            onClick={() => setScreenType(HeaderOptions.FAVORITES)}
+          >
+            <img src={FavoriteNoteIcon} alt="" />
+            {HeaderOptions.FAVORITES}
+          </button>
+          <button
+            className="noteOptionButton"
+            onClick={() => setScreenType(HeaderOptions.LOCKED)}
+          >
+            <img src={LockedNoteIcon} alt="" />
+            {HeaderOptions.LOCKED}
+          </button>
+          <button
+            className="noteOptionButton"
+            onClick={() => setScreenType(HeaderOptions.RECYCLE_BIN)}
+          >
+            <img src={DeleteIcon} alt="" />
+            {HeaderOptions.RECYCLE_BIN}
+          </button>
+        </div>
       </div>
 
       {/* Add Note Button */}
