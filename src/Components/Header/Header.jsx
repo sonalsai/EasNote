@@ -17,7 +17,7 @@ const Header = ({
   const handleOptionClick = (screenType) => {
     setScreenType(screenType);
     if (setIsHeaderVisible) {
-      setIsHeaderVisible(false);
+      setIsHeaderVisible();
     }
   };
 
@@ -42,7 +42,7 @@ const Header = ({
         {isMobile && (
           <div className="closeContainer">
               <h1 className="headerTitle">EazNote</h1>
-            <button className="closeBtn" onClick={() => setIsHeaderVisible(false)}>
+            <button className="closeBtn" onClick={() => setIsHeaderVisible()}>
               <img src={CloseIcon} alt="" />
             </button>
           </div>
@@ -88,7 +88,7 @@ const Header = ({
           onClick={() => {
             setShowAddNoteForm(true);
             if (setIsHeaderVisible) {
-              setIsHeaderVisible(false);
+              setIsHeaderVisible();
             }
           }}
         >

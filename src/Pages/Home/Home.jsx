@@ -20,8 +20,17 @@ const Home = () => {
   const [dialogType, setDialogType] = useState("");
   const [screenType, setScreenType] = useState(HeaderOptions.ALL_NOTES);
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isHeaderClosing, setIsHeaderClosing] = useState(false);
 
   const isMobile = useWindowSize();
+
+  const handleCloseHeader = () => {
+    setIsHeaderClosing(true);
+    setTimeout(() => {
+      setIsHeaderVisible(false);
+      setIsHeaderClosing(false);
+    }, 300);
+  };
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
@@ -46,11 +55,15 @@ const Home = () => {
   return (
     <div className="homeContainer">
       {((isMobile && isHeaderVisible) || !isMobile) && (
-        <div className={`HeaderDivision ${isMobile ? "mobile-header" : ""}`}>
+        <div
+          className={`HeaderDivision ${isMobile ? "mobile-header" : ""} ${
+            isHeaderClosing ? "closing" : ""
+          }`}
+        >
           <Header
             setShowAddNoteForm={setShowAddNoteForm}
             setScreenType={setScreenType}
-            setIsHeaderVisible={setIsHeaderVisible}
+            setIsHeaderVisible={handleCloseHeader}
             isMobile={isMobile}
           />
         </div>

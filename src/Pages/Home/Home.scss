@@ -139,7 +139,7 @@
       justify-content: center;
       padding: 10px 20px 10px 10px;
       gap: 20px;
-
+      
       .hamburgerIcon {
         display: block;
         width: fit-content;
@@ -147,6 +147,7 @@
         background: transparent;
         border: none;
         cursor: pointer;
+        user-select: none;
 
         img {
           width: 28px;
@@ -194,6 +195,10 @@
     &.mobile-header {
       animation: slideIn 0.3s forwards;
     }
+
+    &.closing {
+      animation: slideOut 0.3s forwards;
+    }
   }
 
   @keyframes slideIn {
@@ -202,6 +207,15 @@
     }
     to {
       transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
     }
   }
 }
