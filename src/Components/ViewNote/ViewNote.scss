@@ -35,6 +35,11 @@
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     width: 50%;
 
+    @media screen and (max-width: var.$breakpoint-xl) {
+      height: 90%;
+      width: 80%;
+    }
+
     &.is-visible {
       opacity: 1;
       transform: translateY(0);

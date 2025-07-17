@@ -42,6 +42,11 @@
       width: 40%;
     }
 
+    @media screen and (max-width: var.$breakpoint-xl) {
+      height: 32%;
+      width: 50%;
+    }
+
     .dialogHeader {
       align-items: center;
       display: flex;
