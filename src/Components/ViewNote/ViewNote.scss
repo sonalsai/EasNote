@@ -40,6 +40,11 @@
       width: 80%;
     }
 
+    @media screen and (max-width: 464px) {
+      height: 90%;
+      width: 90%;
+    }
+
     &.is-visible {
       opacity: 1;
       transform: translateY(0);
