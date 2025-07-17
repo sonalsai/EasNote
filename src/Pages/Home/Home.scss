@@ -17,8 +17,10 @@
       gap: 20px;
 
       @media screen and (max-width: var.$breakpoint-md) {
+        position: fixed;
         height: fit-content;
-        padding: 10px 20px 0 20px;
+        padding: 10px 20px 10px 20px;
+        background-color: var.$background-color;
       }
 
       .hamburgerIcon {
@@ -96,7 +98,8 @@
     overflow-y: auto;
 
     @media screen and (max-width: var.$breakpoint-md) {
-      overflow-y: auto;
+      padding-top: 42px;
+      overflow-y: scroll;
       height: fit-content;
     }
   }
@@ -158,6 +161,7 @@
   justify-content: start;
 
   @media screen and (max-width: var.$breakpoint-md) {
+    padding: 10px 20px;
     overflow: hidden;
   }
 }
