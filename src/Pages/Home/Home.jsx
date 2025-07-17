@@ -9,6 +9,7 @@ import { HeaderOptions } from "../../enums";
 import { getNoNotesAvailableText, getScreenTitle } from "../../utils/home";
 import useWindowSize from "../../utils/useWindowSize";
 import hamburgerIcon from "../../assets/hamburgerIcon.svg";
+import Overlay from "../../Components/Overlay/Overlay";
 
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
@@ -69,6 +70,8 @@ const Home = () => {
         </div>
       )}
 
+      {isMobile && isHeaderVisible && <Overlay onClick={handleCloseHeader} />}
+
       <AddNoteForm
         showAddNoteForm={showAddNoteForm}
         setShowAddNoteForm={setShowAddNoteForm}
@@ -78,7 +81,7 @@ const Home = () => {
         setDialogType={setDialogType}
       />
 
-      <div className="mainScreen">
+      <div className={`mainScreen ${isMobile && isHeaderVisible ? "blur" : ""}`}>
         {isMobile && (
           <div className="titleContainer">
             <button
