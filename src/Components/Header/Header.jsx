@@ -41,7 +41,7 @@ const Header = ({
 
         {isMobile && (
           <div className="closeContainer">
-              <h1 className="headerTitle">EazNote</h1>
+            <h1 className="headerTitle">EazNote</h1>
             <button className="closeBtn" onClick={() => setIsHeaderVisible()}>
               <img src={CloseIcon} alt="" />
             </button>

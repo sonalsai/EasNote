@@ -165,7 +165,7 @@ const AddNoteForm = ({
             />
             <label htmlFor="noteTitle">Title</label>
             {errors.noteTitle && (
-              <span className="error-message">
+              <span className="errorMessage">
                 Title cannot exceed 25 characters.
               </span>
             )}

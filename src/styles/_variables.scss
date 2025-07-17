@@ -1,15 +1,14 @@
 //Colors
-$white: white;
-$black: black;
+$accent-color: #bb86fc;
 $background-color: #121212;
-$secondary-background-color: #181818;
+$black: black;
+$button-text-color-1: #381e72;
+$muted-accent-color: #3700b3;
 $note-background-color: #1f1f1f;
 $primary-text-color: #ffffff;
+$secondary-background-color: #181818;
 $secondary-text-color: #eeeeee;
-$accent-color: #bb86fc;
-$muted-accent-color: #3700b3;
-
-$button-text-color-1: #381e72;
+$white: white;
 
 //Fonts
 $font_family: "Poppins";
@@ -18,20 +17,13 @@ $font_family: "Poppins";
 $breakpoint-xs: 480px;
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
-// $breakpoint-lg: 992px;
 $breakpoint-xl: 1024px;
 $breakpoint-xxl: 1440px;
 $breakpoint-xxxl: 1536px;
 
-// Soft shadow for general cards, surfaces
-$box-shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.4);
-
-// Medium shadow for hover/active states, modals
-$box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.5);
-
-// Inset shadow for inner containers, pressed effects
-$box-shadow-inset: inset 0 1px 3px rgba(255, 255, 255, 0.05);
-
-// Accent shadow using theme accent color
+// Shadows
 $box-shadow-accent-1: 0 0 8px rgba(187, 134, 252, 0.4);
 $box-shadow-accent-2: 0 4px 8px rgb(187, 134, 252, 0.5);
+$box-shadow-inset: inset 0 1px 3px rgba(255, 255, 255, 0.05);
+$box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.5);
+$box-shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.4);

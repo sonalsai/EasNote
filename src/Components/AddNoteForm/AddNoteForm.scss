@@ -2,19 +2,19 @@
 @use "../../styles/variables" as var;
 
 .addNoteOverlay {
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  align-items: center;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100%;
+  justify-content: center;
   opacity: 0;
   pointer-events: none;
+  position: fixed;
   transition: opacity 0.3s ease-in-out;
+  width: 100%;
+  z-index: 1000;
 
   &.is-visible {
     opacity: 1;
@@ -23,58 +23,58 @@
 }
 
 .addNoteContainer {
-  width: 50%;
-  height: 80%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: 20px;
   background-color: var.$secondary-background-color;
   border-radius: 8px;
   box-shadow: var.$box-shadow-soft;
-  overflow-y: auto;
-  transform: translateY(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 80%;
+  justify-content: flex-start;
   opacity: 0;
+  overflow-y: auto;
+  padding: 20px;
+  transform: translateY(20px);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  width: 50%;
 
   @media screen and (max-width: var.$breakpoint-xl) {
-    width: 80%;
     height: 78%;
+    width: 80%;
   }
 
   &.is-visible {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 
   .formHeader {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    height: fit-content;
+    justify-content: space-between;
+    width: 100%;
 
     .formTitle {
-      margin: 0;
+      color: var.$primary-text-color;
       font-size: 24px;
       font-weight: 500;
-      color: var.$primary-text-color;
+      margin: 0;
     }
 
     .closeButton {
-      width: fit-content;
       background: transparent;
       border: none;
       cursor: pointer;
       padding: 4px;
+      width: fit-content;
 
       img {
-        width: 28px;
-        height: 28px;
         border-radius: 20px;
+        height: 28px;
         padding: 2px;
+        width: 28px;
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
@@ -87,44 +87,44 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
     height: 100%;
+    width: 100%;
 
     .formGroup {
-      position: relative;
       display: flex;
       flex-direction: column;
       gap: 4px;
-      width: 100%;
       height: fit-content;
+      position: relative;
+      width: 100%;
 
       label {
-        position: absolute;
-        left: 10px;
-        top: 8px;
-        width: fit-content;
-        height: fit-content;
+        border-radius: 10px;
         color: lightgrey;
         font-family: var.$font_family;
         font-size: 16px;
         font-weight: 400;
-        border-radius: 10px;
+        height: fit-content;
+        left: 10px;
         pointer-events: none;
+        position: absolute;
+        top: 8px;
         transition: all 0.2s ease-in-out;
+        width: fit-content;
       }
 
       input,
       textarea {
-        width: 100%;
-        height: 40px;
-        padding: 10px;
+        background-color: transparent;
         border: 1px solid var.$secondary-text-color;
         border-radius: 5px;
-        background-color: transparent;
         color: var.$primary-text-color;
         font-family: var.$font_family;
         font-size: 16px;
         font-weight: 400;
+        height: 40px;
+        padding: 10px;
+        width: 100%;
 
         &:focus,
         &:not(:placeholder-shown) {
@@ -137,12 +137,12 @@
 
         &:focus + label,
         &:not(:placeholder-shown) + label {
-          top: -12px;
-          left: 5px;
-          font-size: 12px;
-          color: var.$accent-color;
           background-color: var.$secondary-background-color;
+          color: var.$accent-color;
+          font-size: 12px;
+          left: 5px;
           padding: 0 5px;
+          top: -12px;
         }
       }
 
@@ -151,7 +151,7 @@
         resize: none;
       }
 
-      .error-message {
+      .errorMessage {
         color: red;
         font-size: 12px;
         padding-left: 5px;
@@ -160,31 +160,31 @@
 
     .textArea {
       height: 100%;
-      min-height: 300px;
       max-height: 600px;
+      min-height: 300px;
     }
   }
 
   .buttonContainer {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%;
+    display: flex;
     height: fit-content;
+    justify-content: center;
     padding: 10px 0;
+    width: 100%;
 
     button {
-      width: 100%;
-      height: 40px;
       background-color: var.$accent-color;
-      color: var.$button-text-color-1;
       border: none;
       border-radius: 20px;
+      color: var.$button-text-color-1;
+      cursor: pointer;
       font-family: var.$font_family;
       font-size: 16px;
       font-weight: 500;
-      cursor: pointer;
+      height: 40px;
       transition: all 0.3s ease;
+      width: 100%;
 
       &:hover {
         background-color: color.adjust(#bb86fc, $lightness: -4%);

@@ -57,7 +57,7 @@ const Home = () => {
     <div className="homeContainer">
       {((isMobile && isHeaderVisible) || !isMobile) && (
         <div
-          className={`HeaderDivision ${isMobile ? "mobile-header" : ""} ${
+          className={`headerDivision ${isMobile ? "mobile-header" : ""} ${
             isHeaderClosing ? "closing" : ""
           }`}
         >
