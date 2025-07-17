@@ -6,12 +6,18 @@ import AllNotesIcon from "../../assets/allNotesIcon.svg";
 import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
+import CloseIcon from "../../assets/closeIcon.svg";
 
-const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
+const Header = ({
+  setShowAddNoteForm,
+  setScreenType,
+  setIsHeaderVisible,
+  isMobile,
+}) => {
   const handleOptionClick = (screenType) => {
     setScreenType(screenType);
     if (setIsHeaderVisible) {
-      setIsHeaderVisible(false);
+      setIsHeaderVisible();
     }
   };
 
@@ -19,17 +25,28 @@ const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
     <div className="headerContainer">
       <div className="topContainer">
         {/* Title */}
-        <div className="titleContainer">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
-            alt="EazNote Logo"
-            className="headerLogo"
-          />
-          <div className="textContainer">
-            <h1 className="headerTitle">EazNote</h1>
-            <span className="headerSubtitle">Your Easy Note-Taking App</span>
+        {!isMobile && (
+          <div className="titleContainer">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
+              alt="EazNote Logo"
+              className="headerLogo"
+            />
+            <div className="textContainer">
+              <h1 className="headerTitle">EazNote</h1>
+              <span className="headerSubtitle">Your Easy Note-Taking App</span>
+            </div>
           </div>
-        </div>
+        )}
+
+        {isMobile && (
+          <div className="closeContainer">
+            <h1 className="headerTitle">EazNote</h1>
+            <button className="closeBtn" onClick={() => setIsHeaderVisible()}>
+              <img src={CloseIcon} alt="" />
+            </button>
+          </div>
+        )}
 
         {/* Note Options */}
         <div className="noteOptionsContainer">
@@ -71,7 +88,7 @@ const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
           onClick={() => {
             setShowAddNoteForm(true);
             if (setIsHeaderVisible) {
-              setIsHeaderVisible(false);
+              setIsHeaderVisible();
             }
           }}
         >

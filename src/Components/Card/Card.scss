@@ -1,16 +1,16 @@
 @use "../../styles/variables" as var;
 
 .cardContainer {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 220px;
-  max-width: 300px;
-  max-height: 220px;
-  padding: 10px 12px;
   background: var.$secondary-background-color;
   border-radius: 20px;
   box-shadow: var.$box-shadow-medium;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: 220px;
+  max-width: 300px;
+  min-width: 220px;
+  padding: 10px 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @media screen and (max-width: var.$breakpoint-xxxl) {
@@ -26,7 +26,7 @@
     min-width: 200px;
   }
 
-  @media screen and (max-width: var.$breakpoint-md){
+  @media screen and (max-width: var.$breakpoint-md) {
     max-width: 224px;
     min-width: 224px;
   }
@@ -36,128 +36,128 @@
   }
 
   &:hover {
-    transform: translateY(-5px);
     box-shadow: var.$box-shadow-accent-2;
+    transform: translateY(-5px);
   }
 
   .cardHeader {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    display: flex;
     height: 50px;
+    justify-content: space-between;
+    width: 100%;
 
     h2 {
-      margin: 0;
-      width: 100%;
-      max-width: 80%;
-      height: fit-content;
+      color: var.$primary-text-color;
       font-size: 20px;
       font-weight: 500;
-      color: var.$primary-text-color;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      height: fit-content;
+      margin: 0;
+      max-width: 80%;
       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
     }
 
     .actionButtons {
-      width: fit-content;
-      display: flex;
       align-items: center;
-      justify-content: end;
+      display: flex;
       gap: 10px;
-      transition: opacity 0.2s ease-in-out;
+      justify-content: end;
       position: relative;
+      transition: opacity 0.2s ease-in-out;
+      width: fit-content;
 
       .optionsDropdown {
-        position: absolute;
-        top: 40px;
-        right: -10px;
+        align-items: center;
         background-color: var.$background-color;
         border-radius: 10px;
         box-shadow: var.$box-shadow-medium;
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 5px;
-        padding: 5px;
-        z-index: 1;
-        width: 150px;
         height: fit-content;
+        padding: 5px;
+        position: absolute;
+        right: -10px;
+        top: 40px;
+        width: 150px;
+        z-index: 1;
 
         button {
-          display: flex;
           align-items: center;
-          justify-content: flex-start;
-          gap: 10px;
-          width: 100%;
-          padding: 5px 10px;
           background-color: transparent;
           border: none;
           border-radius: 5px;
-          cursor: pointer;
-          user-select: none;
           color: var.$primary-text-color;
+          cursor: pointer;
+          display: flex;
           font-family: var.$font_family;
+          gap: 10px;
+          justify-content: flex-start;
+          padding: 5px 10px;
+          user-select: none;
+          width: 100%;
 
           &:hover {
             background-color: rgba(255, 255, 255, 0.1);
           }
 
           img {
-            width: 22px;
             height: 22px;
+            width: 22px;
           }
         }
       }
 
       button {
-        display: flex;
-        justify-content: center;
         align-items: center;
-        width: 30px;
-        height: 30px;
-        padding: 3px;
         background-color: transparent;
         border: none;
         border-radius: 50%;
         cursor: pointer;
+        display: flex;
+        height: 30px;
+        justify-content: center;
+        padding: 3px;
         user-select: none;
+        width: 30px;
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
         }
 
         img {
-          width: 28px;
           height: 28px;
           object-fit: contain;
-          transition: transform 0.2s ease;
           padding: 4px;
+          transition: transform 0.2s ease;
+          width: 28px;
         }
       }
     }
   }
 
   .cardContent {
-    width: 100%;
     height: 170px;
+    width: 100%;
 
     p {
-      margin: 0;
-      width: 100%;
-      max-width: 300px;
-      height: 100%;
-      font-size: 14px;
-      font-weight: 300;
-      color: var.$secondary-text-color;
-      text-align: left;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 8;
+      color: var.$secondary-text-color;
+      display: -webkit-box;
+      font-size: 14px;
+      font-weight: 300;
+      height: 100%;
       line-clamp: 8;
+      margin: 0;
+      max-width: 300px;
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+      width: 100%;
     }
   }
 }

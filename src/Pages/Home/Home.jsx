@@ -9,6 +9,7 @@ import { HeaderOptions } from "../../enums";
 import { getNoNotesAvailableText, getScreenTitle } from "../../utils/home";
 import useWindowSize from "../../utils/useWindowSize";
 import hamburgerIcon from "../../assets/hamburgerIcon.svg";
+import Overlay from "../../Components/Overlay/Overlay";
 
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
@@ -20,8 +21,17 @@ const Home = () => {
   const [dialogType, setDialogType] = useState("");
   const [screenType, setScreenType] = useState(HeaderOptions.ALL_NOTES);
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isHeaderClosing, setIsHeaderClosing] = useState(false);
 
   const isMobile = useWindowSize();
+
+  const handleCloseHeader = () => {
+    setIsHeaderClosing(true);
+    setTimeout(() => {
+      setIsHeaderVisible(false);
+      setIsHeaderClosing(false);
+    }, 300);
+  };
 
   const allNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("notes")) || [];
@@ -46,14 +56,21 @@ const Home = () => {
   return (
     <div className="homeContainer">
       {((isMobile && isHeaderVisible) || !isMobile) && (
-        <div className={`HeaderDivision ${isMobile ? "mobile-header" : ""}`}>
+        <div
+          className={`headerDivision ${isMobile ? "mobile-header" : ""} ${
+            isHeaderClosing ? "closing" : ""
+          }`}
+        >
           <Header
             setShowAddNoteForm={setShowAddNoteForm}
             setScreenType={setScreenType}
-            setIsHeaderVisible={setIsHeaderVisible}
+            setIsHeaderVisible={handleCloseHeader}
+            isMobile={isMobile}
           />
         </div>
       )}
+
+      {isMobile && isHeaderVisible && <Overlay onClick={handleCloseHeader} />}
 
       <AddNoteForm
         showAddNoteForm={showAddNoteForm}
@@ -64,18 +81,29 @@ const Home = () => {
         setDialogType={setDialogType}
       />
 
-      <div className="mainScreen">
+      <div className={`mainScreen ${isMobile && isHeaderVisible ? "blur" : ""}`}>
+        {isMobile && (
+          <div className="titleContainer">
+            <button
+              className="hamburgerIcon"
+              onClick={() => setIsHeaderVisible(true)}
+            >
+              <img src={hamburgerIcon} alt="menu" />
+            </button>
+            <div className="textContainer">
+              <h1 className="headerTitle">EazNote</h1>
+            </div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
+              alt="EazNote Logo"
+              className="headerLogo"
+            />
+          </div>
+        )}
+
         <div className="notesDisplayContainer">
           {/* Screen Title */}
           <div className="screenTitle">
-            {isMobile && (
-              <button
-                className="hamburgerIcon"
-                onClick={() => setIsHeaderVisible(true)}
-              >
-                <img src={hamburgerIcon} alt="menu" />
-              </button>
-            )}
             <h2>{getScreenTitle(screenType)}</h2>
           </div>
 
