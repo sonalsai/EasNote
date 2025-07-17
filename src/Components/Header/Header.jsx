@@ -6,6 +6,7 @@ import AllNotesIcon from "../../assets/allNotesIcon.svg";
 import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
+import CloseIcon from "../../assets/closeIcon.svg";
 
 const Header = ({
   setShowAddNoteForm,
@@ -35,6 +36,15 @@ const Header = ({
               <h1 className="headerTitle">EazNote</h1>
               <span className="headerSubtitle">Your Easy Note-Taking App</span>
             </div>
+          </div>
+        )}
+
+        {isMobile && (
+          <div className="closeContainer">
+              <h1 className="headerTitle">EazNote</h1>
+            <button className="closeBtn" onClick={() => setIsHeaderVisible(false)}>
+              <img src={CloseIcon} alt="" />
+            </button>
           </div>
         )}
 

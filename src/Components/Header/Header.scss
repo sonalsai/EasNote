@@ -30,6 +30,35 @@
     gap: 30px;
     padding: 10px 0;
 
+    .closeContainer {
+      display: none;
+
+      @media screen and (max-width: var.$breakpoint-md) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: fit-content;
+
+        .headerTitle {
+          margin: 0;
+          height: fit-content;
+          font-size: 26px;
+          font-weight: 500;
+          color: var.$primary-text-color;
+          line-height: 1.2;
+          letter-spacing: 0.8px;
+        }
+
+        .closeBtn {
+          border: none;
+          background-color: transparent;
+          padding: 0;
+          width: 26px;
+          height: 26px;
+        }
+      }
+    }
+
     .titleContainer {
       width: 100%;
       height: 60px;
