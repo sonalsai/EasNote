@@ -21,6 +21,7 @@
         height: fit-content;
         padding: 10px 20px 10px 20px;
         background-color: var.$background-color;
+        z-index: 10;
       }
 
       .hamburgerIcon {
@@ -98,7 +99,7 @@
     overflow-y: auto;
 
     @media screen and (max-width: var.$breakpoint-md) {
-      padding-top: 42px;
+      padding-top: 50px;
       overflow-y: scroll;
       height: fit-content;
     }
