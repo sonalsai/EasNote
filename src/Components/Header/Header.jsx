@@ -7,7 +7,12 @@ import FavoriteNoteIcon from "../../assets/favoriteNoteIcon.svg";
 import LockedNoteIcon from "../../assets/lockedNoteIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 
-const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
+const Header = ({
+  setShowAddNoteForm,
+  setScreenType,
+  setIsHeaderVisible,
+  isMobile,
+}) => {
   const handleOptionClick = (screenType) => {
     setScreenType(screenType);
     if (setIsHeaderVisible) {
@@ -19,17 +24,19 @@ const Header = ({ setShowAddNoteForm, setScreenType, setIsHeaderVisible }) => {
     <div className="headerContainer">
       <div className="topContainer">
         {/* Title */}
-        <div className="titleContainer">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
-            alt="EazNote Logo"
-            className="headerLogo"
-          />
-          <div className="textContainer">
-            <h1 className="headerTitle">EazNote</h1>
-            <span className="headerSubtitle">Your Easy Note-Taking App</span>
+        {!isMobile && (
+          <div className="titleContainer">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
+              alt="EazNote Logo"
+              className="headerLogo"
+            />
+            <div className="textContainer">
+              <h1 className="headerTitle">EazNote</h1>
+              <span className="headerSubtitle">Your Easy Note-Taking App</span>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Note Options */}
         <div className="noteOptionsContainer">

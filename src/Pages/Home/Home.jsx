@@ -51,6 +51,7 @@ const Home = () => {
             setShowAddNoteForm={setShowAddNoteForm}
             setScreenType={setScreenType}
             setIsHeaderVisible={setIsHeaderVisible}
+            isMobile={isMobile}
           />
         </div>
       )}
@@ -65,17 +66,28 @@ const Home = () => {
       />
 
       <div className="mainScreen">
+        {isMobile && (
+          <div className="titleContainer">
+            <button
+              className="hamburgerIcon"
+              onClick={() => setIsHeaderVisible(true)}
+            >
+              <img src={hamburgerIcon} alt="menu" />
+            </button>
+            <div className="textContainer">
+              <h1 className="headerTitle">EazNote</h1>
+            </div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1055/1055642.png"
+              alt="EazNote Logo"
+              className="headerLogo"
+            />
+          </div>
+        )}
+
         <div className="notesDisplayContainer">
           {/* Screen Title */}
           <div className="screenTitle">
-            {isMobile && (
-              <button
-                className="hamburgerIcon"
-                onClick={() => setIsHeaderVisible(true)}
-              >
-                <img src={hamburgerIcon} alt="menu" />
-              </button>
-            )}
             <h2>{getScreenTitle(screenType)}</h2>
           </div>
 
