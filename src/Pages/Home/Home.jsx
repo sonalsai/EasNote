@@ -81,7 +81,9 @@ const Home = () => {
         setDialogType={setDialogType}
       />
 
-      <div className={`mainScreen ${isMobile && isHeaderVisible ? "blur" : ""}`}>
+      <div
+        className={`mainScreen ${isMobile && isHeaderVisible ? "blur" : ""}`}
+      >
         {isMobile && (
           <div className="titleContainer">
             <button
