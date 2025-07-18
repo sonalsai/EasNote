@@ -35,6 +35,7 @@
         display: none;
 
         @media screen and (max-width: var.$breakpoint-md) {
+          -webkit-tap-highlight-color: transparent;
           background: transparent;
           border: none;
           cursor: pointer;
