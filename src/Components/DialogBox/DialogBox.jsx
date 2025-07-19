@@ -29,7 +29,10 @@ const DialogBox = ({
   }, [dialogType]);
 
   const handleAction = () => {
-    if (dialogType === DialogType.CONFIRM_DELETE) {
+    if (
+      dialogType === DialogType.CONFIRM_DELETE ||
+      dialogType === DialogType.CONFIRM_MOVE_TO_TRASH
+    ) {
       const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
       const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
       const combinedNotes = [...allNotes, ...allTrashNotes];
@@ -77,6 +80,11 @@ const DialogBox = ({
       setDeleteNoteId(null);
     }, 300); // Match this duration with the CSS transition duration
   };
+
+  const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+  const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+  const combinedNotes = [...allNotes, ...allTrashNotes];
+  const deletedNote = combinedNotes.find((note) => note.id === deleteNoteId);
 
   return (
     <div className={`dialogBoxContainer ${isVisible ? "is-visible" : ""}`}>

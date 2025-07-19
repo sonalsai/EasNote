@@ -41,7 +41,11 @@ const Card = ({
     e.stopPropagation();
     setDeleteNoteId(id);
     setShowDialogBox(true);
-    setDialogType(DialogType.CONFIRM_DELETE);
+    if (note.isDeletedNote) {
+      setDialogType(DialogType.CONFIRM_DELETE);
+    } else {
+      setDialogType(DialogType.CONFIRM_MOVE_TO_TRASH);
+    }
     setShowOptions(false);
   };
 

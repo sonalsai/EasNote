@@ -137,6 +137,7 @@
         }
       }
 
+      .trashBtn,
       .deleteBtn,
       .editCloseBtn,
       .addCloseBtn {
@@ -146,6 +147,11 @@
         &:hover {
           background-color: rgba(red, 0.8);
         }
+      }
+
+      .trashBtn{
+        white-space: nowrap;
+        width: fit-content;
       }
     }
   }
