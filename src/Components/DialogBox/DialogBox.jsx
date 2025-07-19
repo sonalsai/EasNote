@@ -17,6 +17,8 @@ const DialogBox = ({
   setDeleteNoteId,
   setShowAddNoteForm,
   setEditNoteData,
+  fetchNotes,
+  toastRef,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -27,14 +29,17 @@ const DialogBox = ({
   }, [dialogType]);
 
   const handleAction = () => {
-    if (dialogType === DialogType.CONFIRM_DELETE) {
+    if (
+      dialogType === DialogType.CONFIRM_DELETE ||
+      dialogType === DialogType.CONFIRM_MOVE_TO_TRASH
+    ) {
       const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
       const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
       const combinedNotes = [...allNotes, ...allTrashNotes];
       const deletedNote = combinedNotes.find(
         (note) => note.id === deleteNoteId
       );
-      
+
       if (!deletedNote) return;
       if (deletedNote.isDeletedNote) {
         const updatedNotes = allTrashNotes.filter(
@@ -42,6 +47,7 @@ const DialogBox = ({
         );
         localStorage.setItem("trash", JSON.stringify(updatedNotes));
         setShowDialogBox(false);
+        toastRef.current.show("Note permanently deleted");
       } else {
         const deletedNote = allNotes.find((note) => note.id === deleteNoteId);
         const updatedNotes = allNotes.filter(
@@ -53,8 +59,9 @@ const DialogBox = ({
 
         localStorage.setItem("trash", JSON.stringify(trashNotes));
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        toastRef.current.show("Note moved to trash");
       }
-      window.location.reload();
+      fetchNotes();
     } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
       setShowAddNoteForm(false);
       setEditNoteData(null);
@@ -73,6 +80,11 @@ const DialogBox = ({
       setDeleteNoteId(null);
     }, 300); // Match this duration with the CSS transition duration
   };
+
+  const allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+  const allTrashNotes = JSON.parse(localStorage.getItem("trash")) || [];
+  const combinedNotes = [...allNotes, ...allTrashNotes];
+  const deletedNote = combinedNotes.find((note) => note.id === deleteNoteId);
 
   return (
     <div className={`dialogBoxContainer ${isVisible ? "is-visible" : ""}`}>

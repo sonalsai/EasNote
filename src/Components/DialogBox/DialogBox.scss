@@ -34,7 +34,8 @@
     width: 30%;
 
     @media screen and (max-width: var.$breakpoint-xxl) {
-      height: 24%;
+      height: 28%;
+      width: 40%;
     }
 
     @media screen and (max-width: var.$breakpoint-xl) {
@@ -136,6 +137,7 @@
         }
       }
 
+      .trashBtn,
       .deleteBtn,
       .editCloseBtn,
       .addCloseBtn {
@@ -145,6 +147,11 @@
         &:hover {
           background-color: rgba(red, 0.8);
         }
+      }
+
+      .trashBtn{
+        white-space: nowrap;
+        width: fit-content;
       }
     }
   }

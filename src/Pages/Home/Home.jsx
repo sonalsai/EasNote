@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "../../Components/Header/Header";
 import "./Home.scss";
 import AddNoteForm from "../../Components/AddNoteForm/AddNoteForm";
@@ -10,6 +10,7 @@ import { getNoNotesAvailableText, getScreenTitle } from "../../utils/home";
 import useWindowSize from "../../utils/useWindowSize";
 import hamburgerIcon from "../../assets/hamburgerIcon.svg";
 import Overlay from "../../Components/Overlay/Overlay";
+import Toast from "../../Components/Toast/Toast";
 
 const Home = () => {
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
@@ -22,6 +23,8 @@ const Home = () => {
   const [screenType, setScreenType] = useState(HeaderOptions.ALL_NOTES);
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const [isHeaderClosing, setIsHeaderClosing] = useState(false);
+  const [notes, setNotes] = useState([]);
+  const toastRef = useRef(null);
 
   const isMobile = useWindowSize();
 
@@ -33,19 +36,27 @@ const Home = () => {
     }, 300);
   };
 
-  const allNotesFromLocalStorage =
-    JSON.parse(localStorage.getItem("notes")) || [];
+  const fetchNotes = () => {
+    const allNotesFromLocalStorage =
+      JSON.parse(localStorage.getItem("notes")) || [];
+    setNotes(allNotesFromLocalStorage);
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
   const allTrashNotesFromLocalStorage =
     JSON.parse(localStorage.getItem("trash")) || [];
 
   const notesToDisplay = () => {
     switch (screenType) {
       case HeaderOptions.ALL_NOTES:
-        return allNotesFromLocalStorage;
+        return notes;
       case HeaderOptions.FAVORITES:
-        return allNotesFromLocalStorage.filter((note) => note.isFavNote);
+        return notes.filter((note) => note.isFavNote);
       case HeaderOptions.LOCKED:
-        return allNotesFromLocalStorage.filter((note) => note.isLockedNote);
+        return notes.filter((note) => note.isLockedNote);
       case HeaderOptions.RECYCLE_BIN:
         return allTrashNotesFromLocalStorage;
       default:
@@ -79,6 +90,8 @@ const Home = () => {
         setEditNoteData={setEditNoteData}
         setShowDialogBox={setShowDialogBox}
         setDialogType={setDialogType}
+        toastRef={toastRef}
+        fetchNotes={fetchNotes}
       />
 
       <div
@@ -129,6 +142,8 @@ const Home = () => {
                     setDeleteNoteId={setDeleteNoteId}
                     setShowDialogBox={setShowDialogBox}
                     setDialogType={setDialogType}
+                    fetchNotes={fetchNotes}
+                    toastRef={toastRef}
                   />
                 );
               })}
@@ -151,8 +166,12 @@ const Home = () => {
           editNoteData={editNoteData}
           setShowAddNoteForm={setShowAddNoteForm}
           setEditNoteData={setEditNoteData}
+          fetchNotes={fetchNotes}
+          toastRef={toastRef}
         />
       )}
+
+      <Toast ref={toastRef} />
     </div>
   );
 };

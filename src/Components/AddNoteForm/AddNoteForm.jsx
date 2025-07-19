@@ -11,6 +11,8 @@ const AddNoteForm = ({
   setEditNoteData,
   setShowDialogBox,
   setDialogType,
+  toastRef,
+  fetchNotes,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const isSaved = useRef(false);
@@ -109,6 +111,7 @@ const AddNoteForm = ({
       );
       isSaved.current = true;
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
+      toastRef.current.show("Note updated successfully!");
     } else {
       const newNote = {
         id: Date.now(),
@@ -123,10 +126,10 @@ const AddNoteForm = ({
       storedNotes.push(newNote);
       localStorage.setItem("notes", JSON.stringify(storedNotes));
       isSaved.current = true;
+      toastRef.current.show("Note added successfully!");
     }
-
     handleClose();
-    window.location.reload();
+    fetchNotes();
   };
 
   if (!showAddNoteForm) {
