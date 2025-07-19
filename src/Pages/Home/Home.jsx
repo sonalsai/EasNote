@@ -142,6 +142,8 @@ const Home = () => {
                     setDeleteNoteId={setDeleteNoteId}
                     setShowDialogBox={setShowDialogBox}
                     setDialogType={setDialogType}
+                    fetchNotes={fetchNotes}
+                    toastRef={toastRef}
                   />
                 );
               })}
@@ -164,6 +166,8 @@ const Home = () => {
           editNoteData={editNoteData}
           setShowAddNoteForm={setShowAddNoteForm}
           setEditNoteData={setEditNoteData}
+          fetchNotes={fetchNotes}
+          toastRef={toastRef}
         />
       )}
 

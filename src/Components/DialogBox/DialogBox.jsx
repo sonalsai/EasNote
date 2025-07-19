@@ -17,6 +17,8 @@ const DialogBox = ({
   setDeleteNoteId,
   setShowAddNoteForm,
   setEditNoteData,
+  fetchNotes,
+  toastRef,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -34,7 +36,7 @@ const DialogBox = ({
       const deletedNote = combinedNotes.find(
         (note) => note.id === deleteNoteId
       );
-      
+
       if (!deletedNote) return;
       if (deletedNote.isDeletedNote) {
         const updatedNotes = allTrashNotes.filter(
@@ -42,6 +44,7 @@ const DialogBox = ({
         );
         localStorage.setItem("trash", JSON.stringify(updatedNotes));
         setShowDialogBox(false);
+        toastRef.current.show("Note permanently deleted");
       } else {
         const deletedNote = allNotes.find((note) => note.id === deleteNoteId);
         const updatedNotes = allNotes.filter(
@@ -53,8 +56,9 @@ const DialogBox = ({
 
         localStorage.setItem("trash", JSON.stringify(trashNotes));
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        toastRef.current.show("Note moved to trash");
       }
-      window.location.reload();
+      fetchNotes();
     } else if (dialogType === DialogType.CONFIRM_EDIT_CLOSE) {
       setShowAddNoteForm(false);
       setEditNoteData(null);

@@ -34,7 +34,8 @@
     width: 30%;
 
     @media screen and (max-width: var.$breakpoint-xxl) {
-      height: 24%;
+      height: 28%;
+      width: 40%;
     }
 
     @media screen and (max-width: var.$breakpoint-xl) {

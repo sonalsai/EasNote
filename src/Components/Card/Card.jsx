@@ -18,6 +18,8 @@ const Card = ({
   setDeleteNoteId,
   setShowDialogBox,
   setDialogType,
+  fetchNotes,
+  toastRef,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
@@ -70,7 +72,12 @@ const Card = ({
 
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
     setShowOptions(false);
-    window.location.reload();
+    fetchNotes();
+    toastRef.current.show(
+      note.isFavNote
+        ? "Note removed from favorites"
+        : "Note added to favorites"
+    );
   };
 
   const handleLock = (e, note) => {
@@ -86,7 +93,10 @@ const Card = ({
 
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
     setShowOptions(false);
-    window.location.reload();
+    fetchNotes();
+    toastRef.current.show(
+      note.isLockedNote ? "Note unlocked" : "Note locked"
+    );
   };
 
   const handleRestore = (e, id) => {
@@ -102,7 +112,8 @@ const Card = ({
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
     localStorage.setItem("trash", JSON.stringify(updatedTrashNotes));
     setShowOptions(false);
-    window.location.reload();
+    fetchNotes();
+    toastRef.current.show("Note restored successfully");
   };
 
   return (
